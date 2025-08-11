@@ -19,40 +19,39 @@
 
 # Features Implemented
 ## Frontend
-  1. Pages:
-    - Landing
-    - Homepage
-    - Login
-    - Register
-    - Profile Creation & Updation
-    - Profile
-    - Charts
-    - Questionnaires
-    - Wiki & List of Companions
-    - Shop Page
-    - Companions Page
+1. Pages:
+- Landing
+- Homepage
+- Login
+- Register
+- Profile Creation & Updation
+- Profile
+- Charts
+- Questionnaires
+- Wiki & List of Companions
+- Shop Page
+- Companions Page
 
-  2. Notable Features:
-    - Smooth animations using css ans js
-    - Random sprite movements
-    - Hathcing animations
-    - Forms
-    - Notifications popup
-    - 
+2. Notable Features:
+- Smooth animations using css ans js
+- Random sprite movements
+- Hathcing animations
+- Forms
+- Notifications popup
 
 ## Backend
-  1. Main Systems:
-    - User: Authentication, Profiles.
-    - Tracking: Forms, Charts, Score and Coins calculation, scheduling daily tasks.
-    - Companions: Eggs and hatching system, Companions collection system, 
+1. Main Systems:
+- User: Authentication, Profiles.
+- Tracking: Forms, Charts, Score and Coins calculation, scheduling daily tasks.
+- Companions: Eggs and hatching system, Companions collection system, 
   
-  2. Notable Features:
-    - Authentication is handled by Django.
-    - Customizable profile and tracking timings.
-    - Implemented a detailed algorithm to calculate score and coins recieved, taking various factors into consideration.
-    - Admins can create custom questions easily with admin panel.
-    - Logic for hatching, obtaining random Companions, Level system.
-    - Feeding system designed to keep users engaged.
+2. Notable Features:
+- Authentication is handled by Django.
+- Customizable profile and tracking timings.
+- Implemented a detailed algorithm to calculate score and coins recieved, taking various factors into consideration.
+- Admins can create custom questions easily with admin panel.
+- Logic for hatching, obtaining random Companions, Level system.
+- Feeding system designed to keep users engaged.
 
 # Technologies and Libaries Used
 ## Tech Stack
@@ -135,7 +134,9 @@
 
 # Team Members
 [Pranjal Gaur (2024BCS-052)](https://github.com/Pixel-7777)
+
 [Shiv Thanmay (2024IMG-041)](https://github.com/Shiv-th)
+
 [Sridhar Manokaran (2024IMG-045)](https://github.com/sridhar1923)
 
 # Video

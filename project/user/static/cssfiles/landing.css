@@ -1,0 +1,109 @@
+/* Main container for landing page */
+.home-container {
+    background-color: #fffaf0;
+    display: flex;
+    justify-content: center;
+    padding: 2rem;
+    margin: 115px auto;
+}
+
+.home-box {
+    background-color: #ffffff;
+    padding: 3rem 2rem;
+    border-radius: 20px;
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    max-width: 500px;
+    width: 100%;
+    animation: fadeInUp 0.6s ease-out;
+    transform: translateY(-100px);
+}
+.home-box:hover{
+    transform: translateY(-100px) scale(1.05);
+    transform-origin: center;
+    transition: transform 0.3s ease-in-out;
+}
+@keyframes fadeInUp {
+    0% {
+        opacity: 0;
+        transform: translateY(-50px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(-100px);
+    }
+}
+
+.home-logo {
+    width: 100%;
+    margin-bottom: 1.5rem;
+}
+
+.welcome-title {
+    font-size: 2.2rem;
+    color: #ff1493;
+    margin-bottom: 1rem;
+}
+
+.catchy-line {
+    font-size: 1.1rem;
+    color: #333;
+    margin-bottom: 2rem;
+}
+
+.home-buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.home-btn {
+    background-color: #ff1493;
+    color: white;
+    padding: 0.7rem 1.5rem;
+    font-size: 1rem;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+.home-btn:hover {
+    background-color: #c71585;
+    transform: scale(1.05);
+}
+.home-box a{
+    text-decoration: none;
+}
+.icon-text {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+.icon-text img {
+    width: 20px;
+    height: 20px;
+    color: #ffffff;
+    vertical-align: middle;
+    transition: transform 0.3s ease;
+}
+/* Animate the icon inside buttons or links on hover */
+.home-btn:hover .icon-text img {
+    transform: scale(1.05);
+}
+
+.btn-wiki{
+    color: #00897b;
+    font-size: 0.98rem;
+    position: absolute;
+    right: 3rem;
+    bottom: 18px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+.btn-wiki:hover{
+    color: #005f56;
+    text-decoration: underline;
+}

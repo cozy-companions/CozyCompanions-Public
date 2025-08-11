@@ -1,0 +1,25 @@
+{% extends 'index.html' %}
+{% load static %}
+{% block title %}Login - Cozy Companions{% endblock %}
+{% block extra-css %}
+<link rel="stylesheet" href="{% static 'cssfiles/login.css' %}">
+{% endblock %}
+{% block content %}
+<div class="card">
+    {% for message in messages %}
+        {% if 'error' in message.tags %}
+            <div class="login-error-message">{{message}}</div>
+        {% endif %}
+    {% endfor %}
+    <h2>Login</h2>
+    <!-- Login form -->
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit"> Login</button>
+    </form>
+    <div class="link">
+        Don't have an account? <a href="{% url 'register' %}">Sign up</a>
+    </div>
+</div>
+{% endblock %}

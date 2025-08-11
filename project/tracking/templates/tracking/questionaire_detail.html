@@ -1,0 +1,40 @@
+{% extends 'index.html' %}
+{% load static %}
+
+{% block title %}{{ questionnaire.title }} - Cozy Companions{% endblock %}
+{% block extra-css %}
+<link rel="stylesheet" href="{% static 'cssfiles/questionaire-detail.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="card">
+  <h2>{{ questionnaire.title }}</h2>
+  <p class="intro">Take a moment for yourself. Answer these questions to help us understand your day better!🌸</p>
+  <form method="post">
+    {% csrf_token %}
+    {% for field in form.visible_fields %}
+    <div class="card-question">
+      <span class="question-number">{{ forloop.counter }}.</span>
+      {{ field.label_tag }}
+      {% if field.field.widget.input_type == 'range' %}
+      <div class="slider-container">
+        <div class="slider-bubble" id="bubble_{{ field.auto_id }}">5</div>
+        <div class="slider-labels">
+          <span>1</span>
+          <span>10</span>
+        </div>
+        {{ field }}
+      </div>
+      {% else %}
+      {{ field }}
+      {% endif %}
+      {% if field.help_text %}<small>{{ field.help_text }}</small>{% endif %}
+      {% for error in field.errors %}<div class="error">{{ error }}</div>{% endfor %}
+    </div>
+    {% endfor %}
+    <button type="submit">Submit</button>
+  </form>
+</div>
+<!-- Slider bubble logic for range fields -->
+<script src="{% static 'scripts/slider-bubble.js' %}"></script>
+{% endblock %}

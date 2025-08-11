@@ -1,0 +1,477 @@
+/* Center text in body */
+body {
+    text-align: center;
+}
+
+/* Main content wrapper for eggs page */
+.content-wrapper {
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+    font-family: 'Fredoka', sans-serif;
+}
+
+/* Section headings */
+h1 {
+    color: #e7388a;
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+}
+
+h2 {
+    color: #e7388a;
+    border-bottom: 3px solid #f2a619;
+    padding-bottom: 0.5rem;
+    margin-top: 2rem;
+    margin-bottom: 1.5rem;
+    display: table; 
+    margin: 2rem auto 1.5rem auto;
+}
+
+h3{
+    color: #e7388a;
+}
+
+hr {
+    border: none;
+    height: 2px;
+    background-color: #f0eada;
+    margin: 3rem 0;
+}
+
+/* User info bar at top */
+.user-info-bar {
+    text-align: center;
+    background-color: #fdf1e1;
+    border: 2px solid #e7388a;
+    padding: 0.75rem;
+    border-radius: 12px;
+    margin: 0 auto 2rem auto;
+    width: 400px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+.user-info-bar p {
+    margin: 0;
+    font-size: 1.1rem;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    color: #5c3c10;
+    font-weight: 600;
+}
+
+/* Egg shop and user eggs grid */
+.egg-shop, .user-eggs {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 1.5rem;
+    padding: 1rem 0;
+}
+
+.egg-item{
+    background: #ffffff;
+    border-radius: 16px;
+    padding: 1.5rem 1rem;
+    text-align: center;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    border: 1px solid #f0eada;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    width: 200px;
+    min-height: 210px;
+    flex-shrink: 0;
+}
+
+.user-egg {
+    background: #ffffff;
+    border-radius: 16px;
+    padding: 1.5rem 1rem;
+    text-align: center;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    border: 1px solid #f0eada;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    width: 150px;
+    min-height: 245px;
+    margin-bottom: 35px;
+    flex-shrink: 0;
+}
+
+.egg-item:hover, .user-egg:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(231, 56, 138, 0.15);
+}
+
+.egg-item p{
+    color: #555;
+    font-weight: 600;
+    line-height: 1.4;
+    min-height: 2.8em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.user-egg p {
+    color: #555;
+    font-weight: 600;
+    line-height: 1.4;
+    min-height: 2.8em;
+    margin-top: -40px;
+}
+
+.egg-item img, .user-egg .egg-img {
+    margin: 0 auto;
+    transition: transform 0.2s ease;
+    max-width: 100%;
+    height: auto;
+}
+
+.egg-item:hover img, .user-egg:hover .egg-img {
+    transform: scale(1.1);
+}
+
+.user-egg .progress {
+    color: #e7388a;
+    font-weight: 700;
+}
+
+/* --- Buttons --- */
+.buy-egg, .egg-action {
+    background-color: #f2a619; /* Accent Orange */
+    color: #fffaf0; /* Off-white from your nav text */
+    padding: 0.6rem 1.2rem;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-family: 'Fredoka', sans-serif;
+    font-weight: 600;
+    font-size: 1rem;
+    margin-top: -15px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    width: 100%;
+    max-width: 120px;
+}
+
+.buy-egg:hover, .egg-action:hover {
+    background-color: #ffbc00;
+    transform: scale(1.05);
+}
+
+.egg-action:not(:has(.progress)) { 
+    background-color: #e7388a;
+}
+.egg-action:not(:has(.progress)):hover {
+    background-color: #f062b6; 
+}
+
+.buy-egg:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+    transform: none;
+}
+
+#egg-slot-full-warning {
+    color: red;
+    display: inline-block;
+    background-color: #fff0f0;
+    border: 1px solid #ffcccc;
+    padding: 1rem;
+    border-radius: 8px;
+    font-weight: 600;
+    margin: 1rem auto;
+}
+
+/* --- Modal and Creature Reveal Styles --- */
+@keyframes shake {
+  0%, 100% { transform: translate(0, 0) rotate(0deg); }
+  25% { transform: translate(-5px, 0) rotate(-5deg); }
+  50% { transform: translate(5px, 0) rotate(5deg); }
+  75% { transform: translate(-5px, 0) rotate(-5deg); }
+}
+.shake {
+  animation: shake 0.3s;
+}
+
+.modal-overlay {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0,0,0,0.5);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.creature-reveal-modal {
+  background: #fff;
+  border-radius: 24px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.25);
+  padding: 2.5rem 2.5rem 2rem 2.5rem;
+  text-align: center;
+  position: relative;
+  transform: scale(1.2);
+  animation: popIn 0.3s cubic-bezier(.68,-0.55,.27,1.55);
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+}
+@keyframes popIn {
+  0% { transform: scale(0.7); opacity: 0; }
+  100% { transform: scale(1.2); opacity: 1; }
+}
+.close-modal-btn.styled-close {
+  background: #e7388a; /* pink */
+  color: #FFD600; /* yellow */
+  border: none;
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  font-size: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.10);
+  transition: background 0.2s, color 0.2s;
+  position: absolute;
+  top: 16px;
+  right: 20px;
+  z-index: 2;
+}
+.close-modal-btn.styled-close:hover {
+  background: #ff1493;
+  color: #fff700;
+}
+.close-x {
+  color: #FFD600; /* yellow */
+  font-weight: bold;
+  font-size: 2rem;
+  line-height: 1;
+}
+.hatching-text {
+  color: #e7388a;
+  font-weight: bold;
+  font-size: 1.3rem;
+  margin-top: 1.5rem;
+}
+.creature-name-pink {
+  color: #e7388a;
+  font-weight: bold;
+  font-size: 1.2em;
+}
+.blurred > *:not(.modal-overlay) {
+  filter: blur(6px) brightness(0.8);
+  pointer-events: none;
+  user-select: none;
+}
+
+/* --- Wiggle Animation for Hatch Button --- */
+@keyframes wiggle {
+  0% { transform: rotate(-8deg); }
+  15% { transform: rotate(8deg); }
+  30% { transform: rotate(-6deg); }
+  45% { transform: rotate(6deg); }
+  60% { transform: rotate(-3deg); }
+  75% { transform: rotate(3deg); }
+  100% { transform: rotate(0deg); }
+}
+.hatch-wiggle {
+  animation: wiggle 1s;
+}
+
+.creature-reveal {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    animation: fadeIn 0.5s ease-in-out;
+    text-align: center;
+
+    
+}
+@keyframes fadeIn {
+    from { opacity: 0; transform: scale(0.9); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+.creature-reveal img {
+    margin-bottom: 1rem;
+    max-width: 100%;
+    height: auto;
+}
+
+.creature-reveal p {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #333;
+    margin: 0;
+}
+
+.creature-reveal b {
+    color: #e7388a;
+}
+
+.para{
+    margin-top: -30px;
+    font-size: medium;
+}
+
+p .nav-status-icon {
+    margin-bottom: -4px;
+}
+
+
+@media (max-width: 768px) {
+    .content-wrapper {
+        padding: 0 0.5rem;
+        margin: 1rem auto;
+    }
+
+    h1 {
+        font-size: 2rem;
+    }
+
+    h2 {
+        font-size: 1.5rem;
+    }
+
+    .user-info-bar {
+        width: 90%;
+        max-width: 300px;
+        padding: 0.5rem;
+    }
+
+    .user-info-bar p {
+        font-size: 1rem;
+    }
+
+    .egg-shop, .user-eggs {
+        gap: 1rem;
+        padding: 0.5rem 0;
+    }
+
+    .egg-item {
+        width: 160px;
+        min-height: 180px;
+        padding: 1rem 0.5rem;
+    }
+
+    .user-egg {
+        width: 130px;
+        min-height: 220px;
+        padding: 1rem 0.5rem;
+    }
+
+    .egg-item img, .user-egg .egg-img {
+        width: 60px;
+        height: auto;
+    }
+
+    .buy-egg, .egg-action {
+        font-size: 0.9rem;
+        padding: 0.5rem 1rem;
+        max-width: 100px;
+    }
+}
+
+@media (max-width: 480px) {
+    h1 {
+        font-size: 1.8rem;
+    }
+
+    h2 {
+        font-size: 1.3rem;
+    }
+
+    .egg-shop, .user-eggs {
+        gap: 0.8rem;
+    }
+
+    .egg-item {
+        width: 140px;
+        min-height: 160px;
+        padding: 0.8rem 0.4rem;
+    }
+
+    .user-egg {
+        width: 120px;
+        min-height: 200px;
+        padding: 0.8rem 0.4rem;
+    }
+
+    .egg-item img, .user-egg .egg-img {
+        width: 50px;
+        height: auto;
+    }
+
+    .buy-egg, .egg-action {
+        font-size: 0.8rem;
+        padding: 0.4rem 0.8rem;
+        max-width: 90px;
+    }
+
+    .user-info-bar p {
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 360px) {
+    .egg-item {
+        width: 120px;
+        min-height: 150px;
+    }
+
+    .user-egg {
+        width: 110px;
+        min-height: 180px;
+    }
+
+    .egg-item img, .user-egg .egg-img {
+        width: 45px;
+        height: auto;
+    }
+}
+
+.user-eggs p {
+    font-weight: 600;
+    color: #555;
+    margin-top: -10px;
+    margin-bottom: 40px;
+}
+
+@media (max-width: 600px) {
+  .creature-reveal-modal {
+    padding: 1.2rem 0.5rem 1rem 0.5rem;
+    width: 60vw;
+    font-size: 0.98rem;
+  }
+  .creature-reveal-modal img,
+  .modal-egg-img {
+    width: 110px;
+    max-width: 80vw;
+  }
+  .close-modal-btn.styled-close {
+    top: 8px;
+    right: 8px;
+    width: 30px;
+    height: 30px;
+    font-size: 1.3rem;
+  }
+  .hatching-text {
+    font-size: 1.05rem;
+    margin-top: 1rem;
+  }
+  .creature-name-pink {
+    font-size: 1.05em;
+  }
+}

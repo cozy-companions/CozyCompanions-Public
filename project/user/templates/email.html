@@ -1,0 +1,61 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+    
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&display=swap');
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #f5ee73;
+            font-family: 'Fredoka', sans-serif;
+        }
+        .email-container {
+            text-align: center;
+            width: 90%;
+            max-width: 600px;
+            margin: 30px auto;
+            background-color: #ffffff;
+            border-radius: 10px;
+            padding: 30px 25px;
+            color: #425b76;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+        }
+        h2 {
+            text-align: center;
+            color: #ff69b4;
+            margin-bottom: 20px;
+        }
+        hr {
+            border: none;
+            border-top: 1px solid rgba(66,91,118,0.3);
+            width: 50%;
+            margin: 0 auto 25px;
+        }
+        p {
+            font-size: 15px;
+            line-height: 1.5;
+            margin: 16px 0;
+        }
+        .footer {
+            margin-top: 25px;
+            font-size: 13px;
+            color: #7a8ca2;
+            text-align: center;
+        }
+</style>
+</head>
+<body>
+  <div class="email-container">
+    <h2>Welcome, {{ username }}!</h2>
+    <hr>
+    <p>Thanks for signing up with <strong>Cozy Companions</strong>.</p>
+    <p>We’re excited to have you on board <br> You can now <strong>Login</strong> and Create a <strong>Profile</strong></p>
+    <div class="footer">
+      © The Cozy Companions Team
+    </div>
+  </div>
+</body>
+</html>

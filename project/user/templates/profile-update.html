@@ -1,0 +1,109 @@
+{% extends 'index.html' %}
+{% load static %}
+{% block title %}Update Profile - Cozy Companions{% endblock %}
+{% block extra-css %}
+<link rel="stylesheet" href="{% static 'cssfiles/profile-creation.css' %}">
+<link rel="stylesheet" href="{% static 'cssfiles/profile-update.css' %}">
+{% endblock %}
+{% block content %}
+<div class="card">
+  {# The only change needed is the title #}
+  <h2>Update Your Profile</h2>
+
+  <form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    {% if form.errors %}
+    <div class="form-errors">
+      {{ form.non_field_errors }}
+      {% if form.hobbies_json.errors %}
+      {% for error in form.hobbies_json.errors %}
+      <p>{{ error }}</p>
+      {% endfor %}
+      {% endif %}
+
+      {% for field in form %}
+      {% if field.errors and field.name != 'hobbies_json' %}
+      <p>{{ field.label }}: {{ field.errors|striptags }}</p>
+      {% endif %}
+      {% endfor %}
+    </div>
+    {% endif %}
+    <!-- Profile image upload and preview -->
+    <div class="profile-pic-grid">
+      <div class="profile-pic-label">Profile Image<span>:</span></div>
+      <div class="profile-pic-content">
+        <div class="current-row">
+          <span class="label">Current:</span>
+          <img src="{{ form.instance.profile_pic.url }}" alt="Current Profile Picture" class="profile-pic-preview"
+            onerror="this.onerror=null; this.src='/media/default.jpg';">
+          <img src="{% static 'icons/pink_arrow.png' %}" alt="An arrow from current to new profile pic" id="pink_arrow">
+          <img id="new_profile-pic-preview" style="display:none;" class="profile-pic-preview" alt="Image Preview">
+        </div>
+        <div class="change-row">
+          <span class="label">Change:</span>
+          {{ form.profile_pic }}
+        </div>
+      </div>
+    </div>
+
+    <p class="para">Enter your Wake Up Time:</p>
+    <p>{{ form.morning_time.label_tag }} {{ form.morning_time }}</p>
+    <p class="para">Enter when you are free during day:</p>
+    <p>{{ form.day_time.label_tag }} {{ form.day_time }}</p>
+    <p class="para">Enter your Bedtime:</p>
+    <p>{{ form.bed_time.label_tag }} {{ form.bed_time }}</p>
+    {{ form.timezone }}
+
+    {{ form.hobbies_json }}
+
+    <!-- Dynamic hobbies section handled by JS -->
+    <div id="dynamic-hobbies-section">
+      <label for="new-hobby-input">Add a hobby: (Choose upto 5)</label>
+      <input type="text" id="new-hobby-input" placeholder="e.g., Coding">
+      <button type="button" id="add-hobby-btn">+</button>
+      <p class="hobby-instructions">
+        Your hobbies:
+      </p>
+      <div id="dynamic-hobbies-list"></div>
+    </div>
+
+    <div id="submit-reset-buttons">
+      <button type="submit">Submit</button>
+      <button type="reset">Clear</button>
+    </div>
+  </form>
+</div>
+
+{{ hobbies_list|json_script:"initial-hobbies-data" }}
+<!-- Hobbies and timezone JS logic -->
+<script src="{% static 'scripts/add-hobbies.js' %}"></script>
+<script src="{% static 'scripts/timezone-detection.js' %}"></script>
+<script>
+  // Image preview logic for profile pic upload
+  document.addEventListener('DOMContentLoaded', function () {
+    const input = document.getElementById('id_profile_pic');
+    const preview = document.getElementById('new_profile-pic-preview');
+    const arrow = document.getElementById('pink_arrow')
+
+    if (input) {
+      input.addEventListener('change', function () {
+        const file = input.files[0];
+        if (file) {
+          const reader = new FileReader();
+          reader.onload = function (e) {
+            preview.src = e.target.result;
+            preview.style.display = 'inline-block';
+            preview.classList.add('show');
+            if (arrow) arrow.classList.add('show');
+          };
+          reader.readAsDataURL(file);
+        } else {
+          preview.src = '';
+          preview.classList.remove('show');
+          if (arrow) arrow.classList.remove('show');
+        }
+      });
+    }
+  });
+</script>
+{% endblock %}

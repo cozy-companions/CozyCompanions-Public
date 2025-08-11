@@ -1,0 +1,85 @@
+/* Main content wrapper for all companions page */
+.content-wrapper {
+    max-width: 1200px;
+    margin: 1.5rem auto;
+    padding: 0 1rem;
+    font-family: 'Fredoka', sans-serif;
+    align-items: center;
+}
+
+h1 {
+    color: #e7388a;
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+h2 {
+    color: #e7388a; 
+    border-bottom: 3px solid #f2a619;
+    padding-bottom: 0.5rem;
+    font-size: 1.5rem;
+    display: table;
+    margin: 3rem auto 2rem auto; 
+}
+
+/* Grid for all creatures by rarity */
+.dex-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    justify-content: center;
+}
+
+.creature-card {
+    width: 180px;
+    background: #ffffff;
+    border-radius: 16px;
+    padding: 1.5rem 1rem;
+    text-align: center;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    border: 1px solid #f0eada;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.creature-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(231, 56, 138, 0.15);
+}
+
+.creature-card img {
+    width: 100px;
+    height: 100px;
+    object-fit: contain;
+    margin-bottom: 10px;
+    image-rendering: pixelated;
+    image-rendering: crisp-edges;
+}
+
+.creature-card .name {
+    font-weight: 600;
+    color: #333;
+    line-height: 1.3;
+    min-height: 2.6em; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Border color by rarity */
+h2.common, h2.rare, h2.elite, h2.epic, h2.legendary {
+    color: #333; 
+}
+.creature-card.common { border-color: #d3d3d3; }
+.creature-card.rare { border-color: #a9d2ff; }
+.creature-card.elite { border-color: #f7c9cc; }
+.creature-card.epic { border-color: #c6b3e6; }
+.creature-card.legendary { border-color: #ffe0c0; }
+
+body{
+    margin-bottom: 70px;
+}

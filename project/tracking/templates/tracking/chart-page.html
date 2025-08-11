@@ -1,0 +1,23 @@
+{% extends 'index.html' %} 
+{% load static %}
+
+{% block title %}{{ chart_title }} - Cozy Companions {% endblock %}
+
+{% block extra-css %}
+<link rel="stylesheet" href="{% static 'cssfiles/chart-page.css' %}">
+{% endblock %}
+
+{% block content %}
+  <div class="container">
+    <div class="chart-title">{{ chart_title|default:"Your Progress Chart" }}</div>
+    <div class="chart-subtitle">Track your recent progress and trends below.</div>
+    <div class="chart-container">
+      <!-- Chart.js canvas, data-url and data-slug used by JS -->
+      <canvas id="dynamicChart" data-url="{% url 'question_chart_data' slug=slug %}" data-slug="{{ slug }}"></canvas>
+    </div>
+  </div>
+
+<!-- Chart.js library and custom chart logic -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="{% static 'scripts/graph.js' %}"></script>
+{% endblock %}

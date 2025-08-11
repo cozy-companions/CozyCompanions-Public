@@ -1,0 +1,400 @@
+{% extends "index.html" %}
+{% load static %}
+{% load custom_filters %}
+
+{% block extra-css %}
+<link rel="stylesheet" href="{% static 'cssfiles/companions.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="content-wrapper">
+  <h1>Your Companions</h1>
+  <div class="user-info-bar">
+    <p>
+      {{ request.user.profile.points }} <img src="{% static 'icons/coin.png' %}" alt="Coin" class="nav-status-icon"> | 
+      {{ request.user.profile.tickets }} <img src="{% static 'icons/ticket.png' %}" alt="Ticket" class="nav-status-icon">
+    </p>
+  </div>
+
+  <h2>Selected Companions</h2>
+  <div class="selected-creatures-cards">
+    {% for uc in selected_creatures %}
+    {% if not uc.is_hibernating %} 
+    <div class="small-creature-card" data-uc-id="{{ uc.id }}">
+      <img src="{% static uc.creature.icon %}" alt="{{ uc.creature.name }}">
+      <button class="unselect-cross" data-uc-id="{{ uc.id }}">
+        <span>&times;</span>
+      </button>
+    </div>
+    {% endif %}
+    {% empty %}
+    <a href="#all-creatures-head" class="no-selected">Select the Companions to be displayed</a>
+    {% endfor %}
+  </div>
+
+  <div id="active-grid-wrapper">
+    {% for uc in selected_creatures %}
+      {% if not uc.is_hibernating %}
+      <div class="creature-card" id="active-card-{{ uc.id }}">
+        <img src="{% static uc.creature.icon %}" alt="{{ uc.creature.name }}">
+      </div>
+      {% endif %}
+    {% endfor %}
+  </div>
+
+  <hr>
+
+  <div class="all-creatures-header-container">
+      <h2 id="all-creatures-head">All Companions</h2>
+    <div id="feed-all-wrapper"><button id="feed-all">Feed All</button></div>
+  </div>
+  <div id="error-message" class="messages" style="display: none;"></div>
+
+  <!-- Group Creatures by Rarity -->
+  {% regroup user_creatures|dictsort:"creature.rarity" by creature.rarity as rarity_groups %}
+  
+  {% for rarity in rarity_groups %}
+    {% if rarity.grouper == "Legendary" %}
+    <div class="rarity-group">
+      <!-- Active Creatures -->
+      <div class="user-creatures" >
+        {% for uc in rarity.list %}
+          {% if not uc.is_hibernating %}
+          <div class="user-creature rarity-legendary" id="card-{{ uc.id }}" data-icon-url="{% static uc.creature.icon %}">
+            <img src="{% static uc.creature.sprite %}" alt="{{ uc.creature.name }}">
+            <div>
+              <h3>{{ uc.creature.name }}</h3>
+              <h4>Level {{ uc.level }}</h4>
+            </div>
+            <!-- Hunger Bar -->
+            <div class="hunger-bar">
+              <div class="hunger-fill" style="width: {{ uc.hunger_percent }}%"></div>
+            </div>
+
+            <div class="status-text">
+              {% if uc.hunger_percent == 100 %}
+              Hungry!
+              {% else %}
+              Content
+              {% endif %}
+            </div>
+
+            <button class="creature-action feed-btn" data-uc-id="{{ uc.id }}" {% if uc.hunger_percent == 0 %} disabled {%endif%}>
+              Feed
+            </button>
+
+            <button class="creature-action {% if uc.selected %}unselect-btn{% else %}select-btn{% endif %} toggle-btn"
+              data-uc-id="{{ uc.id }}">
+              {% if uc.selected %}Unselect{% else %}Select{% endif %}
+            </button>
+          </div>
+          {% endif %}
+        {% empty %}
+        <p>You don't have any {{ rarity.grouper }} creatures yet.</p>
+        {% endfor %}
+      
+      <!-- Hibernating Creatures of Same Rarity -->
+      {% with hibernating=rarity.list|filter_attr:"is_hibernating" %}
+        {% if hibernating %}
+            {% for uc in hibernating %}
+            <div class="user-creature hibernating" id="h-card-{{ uc.id }}" data-icon-url="{% static uc.creature.icon %}">
+              <img src="{% static uc.creature.sprite %}" alt="{{ uc.creature.name }}">
+              <div>
+                <h3>{{ uc.creature.name }}</h3>
+                <h4>Level: {{ uc.level }}</h4>
+              </div>
+              
+              <div class="status-text">
+                Hibernating
+              </div>
+
+              <button class="creature-action wake-btn" data-uc-id="{{ uc.id }}">
+                {{wake_up_cost}} <img src="{% static 'icons/coin.png' %}" alt="Coin" class="nav-status-icon">
+              </button>
+            </div>
+            {% endfor %}
+      </div>
+        {% endif %}
+      {% endwith %}
+    </div>
+    {% endif %}
+  {% endfor %}
+  {% for rarity in rarity_groups %}
+    {% if rarity.grouper == "Epic" %}
+    <div class="rarity-group">
+      
+      <!-- Active Creatures -->
+      <div class="user-creatures">
+        {% for uc in rarity.list %}
+          {% if not uc.is_hibernating %}
+          <div class="user-creature rarity-elite" id="card-{{ uc.id }}" data-icon-url="{% static uc.creature.icon %}">
+            <img src="{% static uc.creature.sprite %}" alt="{{ uc.creature.name }}">
+            <div>
+              <h3>{{ uc.creature.name }}</h3>
+              <h4>Level {{ uc.level }}</h4>
+            </div>
+            <!-- Hunger Bar -->
+            <div class="hunger-bar">
+              <div class="hunger-fill" style="width: {{ uc.hunger_percent }}%"></div>
+            </div>
+
+            <div class="status-text">
+              {% if uc.hunger_percent == 100 %}
+              Hungry!
+              {% else %}
+              Content
+              {% endif %}
+            </div>
+
+            <button class="creature-action feed-btn" data-uc-id="{{ uc.id }}" {% if uc.hunger_percent == 0 %} disabled {%endif%}>
+              Feed
+            </button>
+
+            <button class="creature-action {% if uc.selected %}unselect-btn{% else %}select-btn{% endif %} toggle-btn"
+              data-uc-id="{{ uc.id }}">
+              {% if uc.selected %}Unselect{% else %}Select{% endif %}
+            </button>
+          </div>
+          {% endif %}
+        {% empty %}
+        <p>You don't have any {{ rarity.grouper }} creatures yet.</p>
+        {% endfor %}
+      
+      <!-- Hibernating Creatures of Same Rarity -->
+      {% with hibernating=rarity.list|filter_attr:"is_hibernating" %}
+        {% if hibernating %}
+            {% for uc in hibernating %}
+            <div class="user-creature hibernating" id="h-card-{{ uc.id }}" data-icon-url="{% static uc.creature.icon %}">
+              <img src="{% static uc.creature.sprite %}" alt="{{ uc.creature.name }}">
+              <div>
+                <h3>{{ uc.creature.name }}</h3>
+                <h4>Level: {{ uc.level }}</h4>
+              </div>
+              
+              <div class="status-text">
+                Hibernating
+              </div>
+
+              <button class="creature-action wake-btn" data-uc-id="{{ uc.id }}">
+                {{wake_up_cost}} <img src="{% static 'icons/coin.png' %}" alt="Coin" class="nav-status-icon">
+              </button>
+            </div>
+            {% endfor %}
+          </div>
+        {% endif %}
+      {% endwith %}
+    </div>
+    {% endif %}
+  {% endfor %}
+  {% for rarity in rarity_groups %}
+    {% if rarity.grouper == "Elite" %}
+    <div class="rarity-group">
+      
+      <!-- Active Creatures -->
+      <div class="user-creatures">
+        {% for uc in rarity.list %}
+          {% if not uc.is_hibernating %}
+          <div class="user-creature rarity-epic" id="card-{{ uc.id }}" data-icon-url="{% static uc.creature.icon %}">
+            <img src="{% static uc.creature.sprite %}" alt="{{ uc.creature.name }}">
+            <div>
+              <h3>{{ uc.creature.name }}</h3>
+              <h4>Level {{ uc.level }}</h4>
+            </div>
+            <!-- Hunger Bar -->
+            <div class="hunger-bar">
+              <div class="hunger-fill" style="width: {{ uc.hunger_percent }}%"></div>
+            </div>
+
+            <div class="status-text">
+              {% if uc.hunger_percent == 100 %}
+              Hungry!
+              {% else %}
+              Content
+              {% endif %}
+            </div>
+
+            <button class="creature-action feed-btn" data-uc-id="{{ uc.id }}" {% if uc.hunger_percent == 0 %} disabled {%endif%}>
+              Feed
+            </button>
+
+            <button class="creature-action {% if uc.selected %}unselect-btn{% else %}select-btn{% endif %} toggle-btn"
+              data-uc-id="{{ uc.id }}">
+              {% if uc.selected %}Unselect{% else %}Select{% endif %}
+            </button>
+          </div>
+          {% endif %}
+        {% empty %}
+        <p>You don't have any {{ rarity.grouper }} creatures yet.</p>
+        {% endfor %}
+      
+      <!-- Hibernating Creatures of Same Rarity -->
+      {% with hibernating=rarity.list|filter_attr:"is_hibernating" %}
+        {% if hibernating %}
+            {% for uc in hibernating %}
+            <div class="user-creature hibernating" id="h-card-{{ uc.id }}" data-icon-url="{% static uc.creature.icon %}">
+              <img src="{% static uc.creature.sprite %}" alt="{{ uc.creature.name }}">
+              <div>
+                <h3>{{ uc.creature.name }}</h3>
+                <h4>Level: {{ uc.level }}</h4>
+              </div>
+              
+              <div class="status-text">
+                Hibernating
+              </div>
+
+              <button class="creature-action wake-btn" data-uc-id="{{ uc.id }}">
+                {{wake_up_cost}} <img src="{% static 'icons/coin.png' %}" alt="Coin" class="nav-status-icon">
+              </button>
+            </div>
+            {% endfor %}
+        {% endif %}
+      {% endwith %}
+    </div>
+    {% endif %}
+  {% endfor %}
+  {% for rarity in rarity_groups %}
+    {% if rarity.grouper == "Rare" %}
+    <div class="rarity-group">
+      
+      <!-- Active Creatures -->
+      <div class="user-creatures">
+        {% for uc in rarity.list %}
+          {% if not uc.is_hibernating %}
+          <div class="user-creature rarity-rare" id="card-{{ uc.id }}" data-icon-url="{% static uc.creature.icon %}">
+            <img src="{% static uc.creature.sprite %}" alt="{{ uc.creature.name }}">
+            <div>
+              <h3>{{ uc.creature.name }}</h3>
+              <h4>Level {{ uc.level }}</h4>
+            </div>
+            <!-- Hunger Bar -->
+            <div class="hunger-bar">
+              <div class="hunger-fill" style="width: {{ uc.hunger_percent }}%"></div>
+            </div>
+
+            <div class="status-text">
+              {% if uc.hunger_percent == 100 %}
+              Hungry!
+              {% else %}
+              Content
+              {% endif %}
+            </div>
+
+            <button class="creature-action feed-btn" data-uc-id="{{ uc.id }}" {% if uc.hunger_percent == 0 %} disabled {%endif%}>
+              Feed
+            </button>
+
+            <button class="creature-action {% if uc.selected %}unselect-btn{% else %}select-btn{% endif %} toggle-btn"
+              data-uc-id="{{ uc.id }}">
+              {% if uc.selected %}Unselect{% else %}Select{% endif %}
+            </button>
+          </div>
+          {% endif %}
+        {% empty %}
+        <p>You don't have any {{ rarity.grouper }} creatures yet.</p>
+        {% endfor %}
+      
+      <!-- Hibernating Creatures of Same Rarity -->
+      {% with hibernating=rarity.list|filter_attr:"is_hibernating" %}
+        {% if hibernating %}
+            {% for uc in hibernating %}
+            <div class="user-creature hibernating" id="h-card-{{ uc.id }}" data-icon-url="{% static uc.creature.icon %}">
+              <img src="{% static uc.creature.sprite %}" alt="{{ uc.creature.name }}">
+              <div>
+                <h3>{{ uc.creature.name }}</h3>
+                <h4>Level: {{ uc.level }}</h4>
+              </div>
+              
+              <div class="status-text">
+                Hibernating
+              </div>
+
+              <button class="creature-action wake-btn" data-uc-id="{{ uc.id }}">
+                {{wake_up_cost}} <img src="{% static 'icons/coin.png' %}" alt="Coin" class="nav-status-icon">
+              </button>
+            </div>
+            {% endfor %}
+          </div>
+        {% endif %}
+      {% endwith %}
+    </div>
+    {% endif %}
+  {% endfor %}
+  {% for rarity in rarity_groups %}
+    {% if rarity.grouper == "Common" %}
+    <div class="rarity-group">
+      
+      <!-- Active Creatures -->
+      <div class="user-creatures">
+        {% for uc in rarity.list %}
+          {% if not uc.is_hibernating %}
+          <div class="user-creature rarity-common" id="card-{{ uc.id }}" data-icon-url="{% static uc.creature.icon %}">
+            <img src="{% static uc.creature.sprite %}" alt="{{ uc.creature.name }}">
+            <div>
+              <h3>{{ uc.creature.name }}</h3>
+              <h4>Level {{ uc.level }}</h4>
+            </div>
+            <!-- Hunger Bar -->
+            <div class="hunger-bar">
+              <div class="hunger-fill" style="width: {{ uc.hunger_percent }}%"></div>
+            </div>
+
+            <div class="status-text">
+              {% if uc.hunger_percent == 100 %}
+              Hungry!
+              {% else %}
+              Content
+              {% endif %}
+            </div>
+
+            <button class="creature-action feed-btn" data-uc-id="{{ uc.id }}" {% if uc.hunger_percent == 0 %} disabled {%endif%}>
+              Feed
+            </button>
+
+            <button class="creature-action {% if uc.selected %}unselect-btn{% else %}select-btn{% endif %} toggle-btn"
+              data-uc-id="{{ uc.id }}">
+              {% if uc.selected %}Unselect{% else %}Select{% endif %}
+            </button>
+          </div>
+          {% endif %}
+        {% empty %}
+        <p>You don't have any {{ rarity.grouper }} creatures yet.</p>
+        {% endfor %}
+      
+      <!-- Hibernating Creatures of Same Rarity -->
+      {% with hibernating=rarity.list|filter_attr:"is_hibernating" %}
+        {% if hibernating %}
+            {% for uc in hibernating %}
+            <div class="user-creature hibernating" id="h-card-{{ uc.id }}" data-icon-url="{% static uc.creature.icon %}">
+              <img src="{% static uc.creature.sprite %}" alt="{{ uc.creature.name }}">
+              <div>
+                <h3>{{ uc.creature.name }}</h3>
+                <h4>Level: {{ uc.level }}</h4>
+              </div>
+              
+              <div class="status-text">
+                Hibernating
+              </div>
+
+              <button class="creature-action wake-btn" data-uc-id="{{ uc.id }}">
+                {{wake_up_cost}} <img src="{% static 'icons/coin.png' %}" alt="Coin" class="nav-status-icon">
+              </button>
+            </div>
+            {% endfor %}
+          </div>
+        {% endif %}
+      {% endwith %}
+    </div>
+    {% endif %}
+  {% endfor %}
+</div>
+<script>
+  // Pass Django template variables to JavaScript
+  window.DJANGO_DATA = {
+    feedUrl: "{% url 'feed' %}",
+    toggleSelectedUrl: "{% url 'toggle_selected' %}",
+    csrfToken: "{{ csrf_token }}"
+  };
+  
+</script>
+<script src="{% static 'scripts/companions.js' %}"></script>
+{% endblock %}

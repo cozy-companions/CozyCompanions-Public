@@ -1,0 +1,184 @@
+{% extends 'index.html' %}
+{% load static %}
+{% block title %}Homepage - Cozy Companions{% endblock %}
+{% block extra-css %}
+<link rel="stylesheet" href="{% static 'cssfiles/homepage.css' %}">
+{% endblock %}
+{% block content %}
+<!-- Notification bell and card logic -->
+<div class="notification-bell-wrapper">
+  {% if companion_notifications.hungry or companion_notifications.dropped or companion_notifications.hibernating %}
+  <div id="notificationBell" class="notification-bell has-notifications">
+    <img src="{% static 'icons/bell.png' %}" alt="Notifications">
+    <span class="notification-dot"></span>
+  </div>
+  {% endif %}
+
+  <div id="notification-card" class="notification-card" onclick="window.location.href='{% url 'companions' %}#creatures-head-wrapper'">
+    {% if companion_notifications.hungry %}
+    <h3>Hungry Companions:</h3>
+    <ul>
+      {% for pet in companion_notifications.hungry %}
+      <li>{{ pet.name }} (Lvl {{ pet.level }}) - Hungry for {{ pet.hungry_hours }} hrs</li>
+      {% endfor %}
+    </ul>
+    {% endif %} {% if companion_notifications.dropped %}
+    <h3>Level Drops:</h3>
+    <ul>
+      {% for pet in companion_notifications.dropped %}
+      <li>{{ pet.name }} dropped {{ pet.dropped }} level(s) to Lvl {{ pet.new_level }}</li>
+      {% endfor %}
+    </ul>
+    {% endif %} {% if companion_notifications.hibernating %}
+    <h3>Hibernating Companions:</h3>
+    <ul>
+      {% for pet in companion_notifications.hibernating %}
+      <li>
+        {{ pet.name }} (Lvl {{ pet.level }}) - Hibernating for {{ pet.hours_hibernating }} hrs
+      </li>
+      {% endfor %}
+    </ul>
+    {% endif %}
+  </div>
+</div>
+<div class="homepage-wrapper" id="content-wrapper">
+  <!-- Desktop Layout -->
+  <div class="desktop-layout">
+    <div class="left-section">
+      <div class="form-card">
+        <div class="container">
+          {% if current_questionnaire %}
+          <h2>{{ current_questionnaire.title }} <br> is available now!</h2>
+          <a href="{% url 'questionaire-detail' current_questionnaire.slug %}" class="link">Start</a>
+          {% elif next_questionnaire %}
+          <h2>The next questionnaire<br>({{ next_questionnaire.title }})<br>will be available in:</h2>
+          <p id="countdown"><strong> {{ seconds_until_next }} </strong></p>
+          <!-- Countdown timer logic below -->
+          <script>
+            function time(seconds) {
+              const hours = Math.floor(seconds / 3600);
+              const mins = Math.floor((seconds % 3600) / 60);
+              const sec = seconds % 60;
+              return `${hours}h ${mins}m ${sec}s`;
+            }
+
+            const countdownElement = document.getElementById("countdown");
+            let seconds = {{ seconds_until_next|default:0 }};
+            countdownElement.innerText = time(seconds);
+            setInterval(() => {
+              if (seconds > 0) {
+                seconds--;
+                countdownElement.innerText = time(seconds);
+              } else {
+                countdownElement.innerText = "Available now!";
+              }
+            }, 1000);
+          </script>
+          {% else %}
+          <h2>No upcoming questionnaires found.</h2>
+          {% endif %}
+        </div>
+      </div>
+
+      <div class="shop-card" onclick="window.location.href='{% url 'companions' %}eggs/'">
+        <img src="{% static 'icons/shop-icon.png' %}" alt="Shop" class="shop-icon">
+        <span class="shop-text">Shop</span>
+      </div>
+    </div>
+
+    <div class="right-section">
+      <div class="preview-card clickable-preview" onclick="window.location.href='{% url 'companions' %}'">
+        <div class="creatures-preview">
+          <h2>Your Companions</h2>
+          {% if selected_creatures %}
+          <div class="preview-grid">
+            <div class="creatures-container">
+              {% for uc in selected_creatures|slice:":4" %}
+              {% if not uc.is_hibernating %}
+              <div class="preview-creature" data-uc-id="{{ uc.id }}">
+                <img src="{% static uc.creature.icon %}" alt="{{ uc.creature.name }}">
+              </div>
+              {% endif %}
+              {% endfor %}
+            </div>
+          </div>
+          {% else %}
+          <div class="no-creatures">
+            <p>No companions selected yet</p>
+            <span class="preview-link">Visit Companions</span>
+          </div>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Mobile Layout -->
+  <div class="mobile-layout">
+    <div class="form-card">
+      <div class="container">
+        {% if current_questionnaire %}
+        <h2>{{ current_questionnaire.title }} <br> is available now!</h2>
+        <a href="{% url 'questionaire-detail' current_questionnaire.slug %}" class="link">Start</a>
+        {% elif next_questionnaire %}
+        <h2>The next questionnaire<br>({{ next_questionnaire.title }})<br>will be available in:</h2>
+        <p id="countdown-mobile"><strong> {{ seconds_until_next }} </strong></p>
+        <!-- Countdown timer logic below -->
+        <script>
+          function time(seconds) {
+            const hours = Math.floor(seconds / 3600);
+            const mins = Math.floor((seconds % 3600) / 60);
+            const sec = seconds % 60;
+            return `${hours}h ${mins}m ${sec}s`;
+          }
+
+          const countdownElementMobile = document.getElementById("countdown-mobile");
+          let secondsMobile = {{ seconds_until_next|default:0 }};
+          countdownElementMobile.innerText = time(secondsMobile);
+          setInterval(() => {
+            if (secondsMobile > 0) {
+              secondsMobile--;
+              countdownElementMobile.innerText = time(secondsMobile);
+            } else {
+              countdownElementMobile.innerText = "Available now!";
+            }
+          }, 1000);
+        </script>
+        {% else %}
+        <h2>No upcoming questionnaires found.</h2>
+        {% endif %}
+      </div>
+    </div>
+
+    <div class="preview-card clickable-preview" onclick="window.location.href='{% url 'companions' %}'">
+      <div class="creatures-preview">
+        <h2>Your Companions</h2>
+        {% if selected_creatures %}
+        <div class="preview-grid">
+          <div class="creatures-container">
+            {% for uc in selected_creatures|slice:":4" %}
+            <div class="preview-creature" data-uc-id="{{ uc.id }}">
+              <img src="{% static uc.creature.icon %}" alt="{{ uc.creature.name }}">
+            </div>
+            {% endfor %}
+          </div>
+        </div>
+        {% else %}
+        <div class="no-creatures">
+          <p>No companions selected yet</p>
+          <span class="preview-link">Visit Companions</span>
+        </div>
+        {% endif %}
+
+      </div>
+    </div>
+
+    <div class="shop-card" onclick="window.location.href='{% url 'companions' %}eggs/'">
+      <img src="{% static 'icons/shop-icon.png' %}" alt="Shop" class="shop-icon">
+      <span class="shop-text">Shop</span>
+    </div>
+  </div>
+</div>
+<!-- Preview creatures animation and notification logic -->
+<script src="{% static 'scripts/homepage-creatures.js' %}"></script>
+{% endblock %}

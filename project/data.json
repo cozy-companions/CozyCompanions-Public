@@ -1,0 +1,892 @@
+[
+{
+  "model": "creatures.creature",
+  "pk": 1,
+  "fields": {
+    "name": "Baobi",
+    "rarity": "Common",
+    "sprite": "creatures/common/sprites/baobi.webp",
+    "icon": "creatures/common/icons/baobi.webp"
+  }
+},
+{
+  "model": "creatures.creature",
+  "pk": 2,
+  "fields": {
+    "name": "Cabatie",
+    "rarity": "Common",
+    "sprite": "creatures/common/sprites/cabatie.webp",
+    "icon": "creatures/common/icons/cabatie.webp"
+  }
+},
+{
+  "model": "creatures.creature",
+  "pk": 3,
+  "fields": {
+    "name": "Dampurr",
+    "rarity": "Common",
+    "sprite": "creatures/common/sprites/dampurr.webp",
+    "icon": "creatures/common/icons/dampurr.webp"
+  }
+},
+{
+  "model": "creatures.creature",
+  "pk": 4,
+  "fields": {
+    "name": "Dampybara",
+    "rarity": "Common",
+    "sprite": "creatures/common/sprites/dampybara.webp",
+    "icon": "creatures/common/icons/dampybara.webp"
+  }
+},
+{
+  "model": "creatures.creature",
+  "pk": 5,
+  "fields": {
+    "name": "Dorewee",
+    "rarity": "Common",
+    "sprite": "creatures/common/sprites/dorewee.webp",
+    "icon": "creatures/common/icons/dorewee.webp"
+  }
+},
+{
+  "model": "creatures.creature",
+  "pk": 6,
+  "fields": {
+    "name": "Dynabit",
+    "rarity": "Common",
+    "sprite": "creatures/common/sprites/dynabit.webp",
+    "icon": "creatures/common/icons/dynabit.webp"
+  }
+},
+{
+  "model": "creatures.creature",
+  "pk": 7,
+  "fields": {
+    "name": "Goobolt",
+    "rarity": "Common",
+    "sprite": "creatures/common/sprites/goobolt.webp",
+    "icon": "creatures/common/icons/goobolt.webp"
+  }
+},
+{
+  "model": "creatures.creature",
+  "pk": 8,
+  "fields": {
+    "name": "Lavee",
+    "rarity": "Common",
+    "sprite": "creatures/common/sprites/lavee.webp",
+    "icon": "creatures/common/icons/lavee.webp"
+  }
+},
+{
+  "model": "creatures.creature",
+  "pk": 9,
+  "fields": {
+    "name": "Octolect",
+    "rarity": "Common",
+    "sprite": "creatures/common/sprites/octolect.webp",
+    "icon": "creatures/common/icons/octolect.webp"
+  }
+},
+{
+  "model": "creatures.creature",
+  "pk": 10,
+  "fields": {
+    "name": "Peday",
+    "rarity": "Common",
+    "sprite": "creatures/common/sprites/peday.webp",
+    "icon": "creatures/common/icons/peday.webp"
+  }
+},
+{
+  "model": "creatures.creature",
+  "pk": 11,
+  "fields": {
+    "name": "Rhinplink",
+    "rarity": "Common",
+    "sprite": "creatures/common/sprites/rhinplink.webp",
+    "icon": "creatures/common/icons/rhinplink.webp"
+  }
+},
+{
+  "model": "creatures.creature",
+  "pk": 12,
+  "fields": {
+    "name": "Chargoo",
+    "rarity": "Elite",
+    "sprite": "creatures/elite/sprites/chargoo.webp",
+    "icon": "creatures/elite/icons/chargoo.webp"
+  }
+},
+{
+  "model": "creatures.creature",
+  "pk": 13,
+  "fields": {
+    "name": "Ogerpen",
+    "rarity": "Elite",
+    "sprite": "creatures/elite/sprites/ogerpen.webp",
+    "icon": "creatures/elite/icons/ogerpen.webp"
+  }
+},
+{
+  "model": "creatures.creature",
+  "pk": 14,
+  "fields": {
+    "name": "Pangshi",
+    "rarity": "Elite",
+    "sprite": "creatures/elite/sprites/pangshi.webp",
+    "icon": "creatures/elite/icons/pangshi.webp"
+  }
+},
+{
+  "model": "creatures.creature",
+  "pk": 15,
+  "fields": {
+    "name": "Stalass",
+    "rarity": "Elite",
+    "sprite": "creatures/elite/sprites/stalass.webp",
+    "icon": "creatures/elite/icons/stalass.webp"
+  }
+},
+{
+  "model": "creatures.creature",
+  "pk": 16,
+  "fields": {
+    "name": "Baobaraffe",
+    "rarity": "Epic",
+    "sprite": "creatures/epic/sprites/baobaraffe.webp",
+    "icon": "creatures/epic/icons/baobaraffe.webp"
+  }
+},
+{
+  "model": "creatures.creature",
+  "pk": 17,
+  "fields": {
+    "name": "Germeit",
+    "rarity": "Epic",
+    "sprite": "creatures/epic/sprites/germeit.webp",
+    "icon": "creatures/epic/icons/germeit.webp"
+  }
+},
+{
+  "model": "creatures.creature",
+  "pk": 18,
+  "fields": {
+    "name": "Mourin",
+    "rarity": "Epic",
+    "sprite": "creatures/epic/sprites/mourin.webp",
+    "icon": "creatures/epic/icons/mourin.webp"
+  }
+},
+{
+  "model": "creatures.creature",
+  "pk": 19,
+  "fields": {
+    "name": "Plasmatina",
+    "rarity": "Legendary",
+    "sprite": "creatures/legendary/sprites/plasmatina.webp",
+    "icon": "creatures/legendary/icons/plasmatina.webp"
+  }
+},
+{
+  "model": "creatures.creature",
+  "pk": 20,
+  "fields": {
+    "name": "Wizowl",
+    "rarity": "Legendary",
+    "sprite": "creatures/legendary/sprites/wizowl.webp",
+    "icon": "creatures/legendary/icons/wizowl.webp"
+  }
+},
+{
+  "model": "creatures.creature",
+  "pk": 21,
+  "fields": {
+    "name": "Floramora",
+    "rarity": "Rare",
+    "sprite": "creatures/rare/sprites/floramora.webp",
+    "icon": "creatures/rare/icons/floramora.webp"
+  }
+},
+{
+  "model": "creatures.creature",
+  "pk": 22,
+  "fields": {
+    "name": "Glovet",
+    "rarity": "Rare",
+    "sprite": "creatures/rare/sprites/glovet.webp",
+    "icon": "creatures/rare/icons/glovet.webp"
+  }
+},
+{
+  "model": "creatures.creature",
+  "pk": 23,
+  "fields": {
+    "name": "Lilleo",
+    "rarity": "Rare",
+    "sprite": "creatures/rare/sprites/lilleo.webp",
+    "icon": "creatures/rare/icons/lilleo.webp"
+  }
+},
+{
+  "model": "creatures.creature",
+  "pk": 24,
+  "fields": {
+    "name": "Museon",
+    "rarity": "Rare",
+    "sprite": "creatures/rare/sprites/museon.webp",
+    "icon": "creatures/rare/icons/museon.webp"
+  }
+},
+{
+  "model": "creatures.creature",
+  "pk": 25,
+  "fields": {
+    "name": "Mystifox",
+    "rarity": "Rare",
+    "sprite": "creatures/rare/sprites/mystifox.webp",
+    "icon": "creatures/rare/icons/mystifox.webp"
+  }
+},
+{
+  "model": "creatures.egg",
+  "pk": 1,
+  "fields": {
+    "rarity": "Common",
+    "price": 250,
+    "hatch_requirement": 1,
+    "sprite": "eggs/common/base.png",
+    "hatch_sprites": [
+      "eggs/common/hatch1.png",
+      "eggs/common/hatch2.png",
+      "eggs/common/hatch3.png"
+    ]
+  }
+},
+{
+  "model": "creatures.egg",
+  "pk": 2,
+  "fields": {
+    "rarity": "Rare",
+    "price": 500,
+    "hatch_requirement": 2,
+    "sprite": "eggs/rare/base.png",
+    "hatch_sprites": [
+      "eggs/rare/hatch1.png",
+      "eggs/rare/hatch2.png",
+      "eggs/rare/hatch3.png"
+    ]
+  }
+},
+{
+  "model": "creatures.egg",
+  "pk": 3,
+  "fields": {
+    "rarity": "Elite",
+    "price": 1000,
+    "hatch_requirement": 3,
+    "sprite": "eggs/elite/base.png",
+    "hatch_sprites": [
+      "eggs/elite/hatch1.png",
+      "eggs/elite/hatch2.png",
+      "eggs/elite/hatch3.png"
+    ]
+  }
+},
+{
+  "model": "creatures.egg",
+  "pk": 4,
+  "fields": {
+    "rarity": "Epic",
+    "price": 1500,
+    "hatch_requirement": 4,
+    "sprite": "eggs/epic/base.png",
+    "hatch_sprites": [
+      "eggs/epic/hatch1.png",
+      "eggs/epic/hatch2.png",
+      "eggs/epic/hatch3.png"
+    ]
+  }
+},
+{
+  "model": "creatures.egg",
+  "pk": 5,
+  "fields": {
+    "rarity": "Legendary",
+    "price": 2000,
+    "hatch_requirement": 5,
+    "sprite": "eggs/legendary/base.png",
+    "hatch_sprites": [
+      "eggs/legendary/hatch1.png",
+      "eggs/legendary/hatch2.png",
+      "eggs/legendary/hatch3.png"
+    ]
+  }
+},
+{
+  "model": "tracking.questionaire",
+  "pk": 1,
+  "fields": {
+    "title": "Morning Checkin",
+    "slug": "morning-checkin",
+    "type": "morning",
+    "is_active": true
+  }
+},
+{
+  "model": "tracking.questionaire",
+  "pk": 2,
+  "fields": {
+    "title": "Mid Day Lookout",
+    "slug": "mid-day-lookout",
+    "type": "day",
+    "is_active": true
+  }
+},
+{
+  "model": "tracking.questionaire",
+  "pk": 3,
+  "fields": {
+    "title": "Night Time Reflection",
+    "slug": "night-time-reflection",
+    "type": "bed",
+    "is_active": true
+  }
+},
+{
+  "model": "tracking.question",
+  "pk": 2,
+  "fields": {
+    "questionaire": 1,
+    "text": "How relaxed are you after sleep?",
+    "slug": "sleep",
+    "question_type": "rating",
+    "weight": 0.7,
+    "affects_score": true,
+    "depends_on_question": null,
+    "is_optional": false
+  }
+},
+{
+  "model": "tracking.question",
+  "pk": 3,
+  "fields": {
+    "questionaire": 1,
+    "text": "How do you feel your day to going to be?",
+    "slug": null,
+    "question_type": "single",
+    "weight": 1.2,
+    "affects_score": true,
+    "depends_on_question": null,
+    "is_optional": false
+  }
+},
+{
+  "model": "tracking.question",
+  "pk": 4,
+  "fields": {
+    "questionaire": 1,
+    "text": "On a scale of 1 to 10, how motivated are you about the day?",
+    "slug": "motivation",
+    "question_type": "rating",
+    "weight": 1.1,
+    "affects_score": true,
+    "depends_on_question": null,
+    "is_optional": false
+  }
+},
+{
+  "model": "tracking.question",
+  "pk": 5,
+  "fields": {
+    "questionaire": 1,
+    "text": "What hobbies do you plan on spending time on? (optional)",
+    "slug": null,
+    "question_type": "multiple",
+    "weight": 1.0,
+    "affects_score": false,
+    "depends_on_question": null,
+    "is_optional": true
+  }
+},
+{
+  "model": "tracking.question",
+  "pk": 6,
+  "fields": {
+    "questionaire": 1,
+    "text": "Make one commitment today (optional)",
+    "slug": null,
+    "question_type": "text",
+    "weight": 1.0,
+    "affects_score": false,
+    "depends_on_question": null,
+    "is_optional": true
+  }
+},
+{
+  "model": "tracking.question",
+  "pk": 7,
+  "fields": {
+    "questionaire": 2,
+    "text": "Rate your general emotions on a scale of 1 to 10",
+    "slug": null,
+    "question_type": "rating",
+    "weight": 1.3,
+    "affects_score": true,
+    "depends_on_question": null,
+    "is_optional": false
+  }
+},
+{
+  "model": "tracking.question",
+  "pk": 8,
+  "fields": {
+    "questionaire": 2,
+    "text": "How are your social interactions going so far?",
+    "slug": "social-development",
+    "question_type": "single",
+    "weight": 1.1,
+    "affects_score": true,
+    "depends_on_question": null,
+    "is_optional": false
+  }
+},
+{
+  "model": "tracking.question",
+  "pk": 9,
+  "fields": {
+    "questionaire": 2,
+    "text": "How focussed have you been today? (out of 10)",
+    "slug": null,
+    "question_type": "rating",
+    "weight": 1.0,
+    "affects_score": true,
+    "depends_on_question": null,
+    "is_optional": false
+  }
+},
+{
+  "model": "tracking.question",
+  "pk": 10,
+  "fields": {
+    "questionaire": 2,
+    "text": "Have you felt stressed so far?",
+    "slug": null,
+    "question_type": "single",
+    "weight": 1.2,
+    "affects_score": true,
+    "depends_on_question": null,
+    "is_optional": false
+  }
+},
+{
+  "model": "tracking.question",
+  "pk": 11,
+  "fields": {
+    "questionaire": 2,
+    "text": "Describe your routine so far.",
+    "slug": null,
+    "question_type": "single",
+    "weight": 0.9,
+    "affects_score": true,
+    "depends_on_question": null,
+    "is_optional": false
+  }
+},
+{
+  "model": "tracking.question",
+  "pk": 12,
+  "fields": {
+    "questionaire": 2,
+    "text": "How close are you to completing your commitment:",
+    "slug": null,
+    "question_type": "single",
+    "weight": 1.0,
+    "affects_score": false,
+    "depends_on_question": null,
+    "is_optional": true
+  }
+},
+{
+  "model": "tracking.question",
+  "pk": 13,
+  "fields": {
+    "questionaire": 3,
+    "text": "Rate your entire day on a scale of 1 to 10",
+    "slug": "daily-rating",
+    "question_type": "rating",
+    "weight": 1.2,
+    "affects_score": true,
+    "depends_on_question": null,
+    "is_optional": false
+  }
+},
+{
+  "model": "tracking.question",
+  "pk": 14,
+  "fields": {
+    "questionaire": 3,
+    "text": "Did your day go how you expected it to?",
+    "slug": "daily-reflection",
+    "question_type": "single",
+    "weight": 0.5,
+    "affects_score": true,
+    "depends_on_question": null,
+    "is_optional": false
+  }
+},
+{
+  "model": "tracking.question",
+  "pk": 15,
+  "fields": {
+    "questionaire": 3,
+    "text": "Did you spend time on hobbies today? (ignore if not commited)",
+    "slug": null,
+    "question_type": "multiple",
+    "weight": 1.0,
+    "affects_score": true,
+    "depends_on_question": 5,
+    "is_optional": true
+  }
+},
+{
+  "model": "tracking.question",
+  "pk": 16,
+  "fields": {
+    "questionaire": 3,
+    "text": "Did you fulfil your commitment?",
+    "slug": null,
+    "question_type": "single",
+    "weight": 1.25,
+    "affects_score": true,
+    "depends_on_question": 6,
+    "is_optional": true
+  }
+},
+{
+  "model": "tracking.question",
+  "pk": 17,
+  "fields": {
+    "questionaire": 3,
+    "text": "Write a journal entry for today: (optional)",
+    "slug": null,
+    "question_type": "text",
+    "weight": 1.0,
+    "affects_score": false,
+    "depends_on_question": null,
+    "is_optional": true
+  }
+},
+{
+  "model": "tracking.question",
+  "pk": 18,
+  "fields": {
+    "questionaire": 3,
+    "text": "If you could change something about today, what would it be? (optional)",
+    "slug": null,
+    "question_type": "text",
+    "weight": 1.0,
+    "affects_score": false,
+    "depends_on_question": null,
+    "is_optional": true
+  }
+},
+{
+  "model": "tracking.choice",
+  "pk": 1,
+  "fields": {
+    "question": 3,
+    "text": "Great",
+    "choice_score": 5
+  }
+},
+{
+  "model": "tracking.choice",
+  "pk": 2,
+  "fields": {
+    "question": 3,
+    "text": "Good",
+    "choice_score": 4
+  }
+},
+{
+  "model": "tracking.choice",
+  "pk": 3,
+  "fields": {
+    "question": 3,
+    "text": "Average",
+    "choice_score": 3
+  }
+},
+{
+  "model": "tracking.choice",
+  "pk": 4,
+  "fields": {
+    "question": 3,
+    "text": "Somewhat bad",
+    "choice_score": 2
+  }
+},
+{
+  "model": "tracking.choice",
+  "pk": 5,
+  "fields": {
+    "question": 3,
+    "text": "Bad",
+    "choice_score": 1
+  }
+},
+{
+  "model": "tracking.choice",
+  "pk": 6,
+  "fields": {
+    "question": 8,
+    "text": "Great",
+    "choice_score": 5
+  }
+},
+{
+  "model": "tracking.choice",
+  "pk": 7,
+  "fields": {
+    "question": 8,
+    "text": "Good",
+    "choice_score": 4
+  }
+},
+{
+  "model": "tracking.choice",
+  "pk": 8,
+  "fields": {
+    "question": 8,
+    "text": "Average",
+    "choice_score": 3
+  }
+},
+{
+  "model": "tracking.choice",
+  "pk": 9,
+  "fields": {
+    "question": 8,
+    "text": "Somewhat bad",
+    "choice_score": 2
+  }
+},
+{
+  "model": "tracking.choice",
+  "pk": 10,
+  "fields": {
+    "question": 8,
+    "text": "Bad",
+    "choice_score": 1
+  }
+},
+{
+  "model": "tracking.choice",
+  "pk": 11,
+  "fields": {
+    "question": 10,
+    "text": "Yes",
+    "choice_score": 1
+  }
+},
+{
+  "model": "tracking.choice",
+  "pk": 12,
+  "fields": {
+    "question": 10,
+    "text": "Somewhat",
+    "choice_score": 2
+  }
+},
+{
+  "model": "tracking.choice",
+  "pk": 13,
+  "fields": {
+    "question": 10,
+    "text": "No",
+    "choice_score": 3
+  }
+},
+{
+  "model": "tracking.choice",
+  "pk": 14,
+  "fields": {
+    "question": 11,
+    "text": "Energetic",
+    "choice_score": 5
+  }
+},
+{
+  "model": "tracking.choice",
+  "pk": 15,
+  "fields": {
+    "question": 11,
+    "text": "Relaxed",
+    "choice_score": 4
+  }
+},
+{
+  "model": "tracking.choice",
+  "pk": 16,
+  "fields": {
+    "question": 11,
+    "text": "Challenging",
+    "choice_score": 2
+  }
+},
+{
+  "model": "tracking.choice",
+  "pk": 17,
+  "fields": {
+    "question": 11,
+    "text": "Lazy",
+    "choice_score": 3
+  }
+},
+{
+  "model": "tracking.choice",
+  "pk": 18,
+  "fields": {
+    "question": 11,
+    "text": "Terrible",
+    "choice_score": 1
+  }
+},
+{
+  "model": "tracking.choice",
+  "pk": 19,
+  "fields": {
+    "question": 12,
+    "text": "Very close",
+    "choice_score": null
+  }
+},
+{
+  "model": "tracking.choice",
+  "pk": 20,
+  "fields": {
+    "question": 12,
+    "text": "Somewhat close",
+    "choice_score": null
+  }
+},
+{
+  "model": "tracking.choice",
+  "pk": 21,
+  "fields": {
+    "question": 12,
+    "text": "Not yet started",
+    "choice_score": null
+  }
+},
+{
+  "model": "tracking.choice",
+  "pk": 22,
+  "fields": {
+    "question": 14,
+    "text": "Yes",
+    "choice_score": 2
+  }
+},
+{
+  "model": "tracking.choice",
+  "pk": 23,
+  "fields": {
+    "question": 14,
+    "text": "No",
+    "choice_score": 1
+  }
+},
+{
+  "model": "tracking.choice",
+  "pk": 24,
+  "fields": {
+    "question": 16,
+    "text": "Yes",
+    "choice_score": 5
+  }
+},
+{
+  "model": "tracking.choice",
+  "pk": 25,
+  "fields": {
+    "question": 16,
+    "text": "No",
+    "choice_score": 1
+  }
+},
+{
+  "model": "tracking.choice",
+  "pk": 26,
+  "fields": {
+    "question": 5,
+    "text": "Exercise",
+    "choice_score": 0
+  }
+},
+{
+  "model": "tracking.choice",
+  "pk": 27,
+  "fields": {
+    "question": 5,
+    "text": "Reading",
+    "choice_score": 0
+  }
+},
+{
+  "model": "tracking.choice",
+  "pk": 28,
+  "fields": {
+    "question": 5,
+    "text": "Art",
+    "choice_score": 0
+  }
+},
+{
+  "model": "tracking.choice",
+  "pk": 29,
+  "fields": {
+    "question": 5,
+    "text": "Movies and TV",
+    "choice_score": 0
+  }
+},
+{
+  "model": "tracking.choice",
+  "pk": 30,
+  "fields": {
+    "question": 5,
+    "text": "Music",
+    "choice_score": 0
+  }
+},
+{
+  "model": "tracking.choice",
+  "pk": 31,
+  "fields": {
+    "question": 5,
+    "text": "Coding",
+    "choice_score": 0
+  }
+},
+{
+  "model": "tracking.choice",
+  "pk": 32,
+  "fields": {
+    "question": 5,
+    "text": "Video Games",
+    "choice_score": 0
+  }
+},
+{
+  "model": "tracking.choice",
+  "pk": 33,
+  "fields": {
+    "question": 5,
+    "text": "e",
+    "choice_score": 0
+  }
+}
+]

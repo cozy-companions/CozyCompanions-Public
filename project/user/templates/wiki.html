@@ -1,0 +1,109 @@
+{% extends "index.html" %}
+{% load static %}
+
+{% block title %}Wiki - Cozy Companions{% endblock %}
+
+{% block extra-css %}
+<link rel="stylesheet" href="{% static 'cssfiles/wiki.css' %}">
+{% endblock %}
+
+{% block content %}
+<article class="wiki-container">
+  <!-- Table of contents navigation -->
+  <nav class="wiki-toc">
+    <div class="wiki-toc-header">
+      <span><h2>Contents</h2></span>
+      <span class="wiki-toc-toggle">▼</span>
+    </div>
+    <div class="wiki-toc-content">
+      <ul>
+        <li><a href="#introduction">Cozy Companions</a></li>
+        <li><a href="#features">Features</a></li>
+        <li><a href="#tracking">Tracking</a></li>
+        <li><a href="#collection">Collection</a></li>
+        <li><a href="#references">Credits and References</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Wiki Content Sections -->
+  <section>
+    <h2 id="introduction">Cozy Companions</h2>
+    <p>
+      Cozy Companions is a mental health tracker with fun creature collection elements.
+      You track your mental health, hatch eggs, and collect companions that level up over time.
+      The project is built entirely with Django, HTML, CSS (no frameworks), and JavaScript.
+      All art is either original or from copyright-free sources.
+    </p>
+
+    <h2 id="features">Features</h2>
+    <ul>
+      <li>Set your preferred times to complete daily mental health questionnaires.</li>
+      <li>Hatch eggs and collect unique companions.</li>
+      <li>Earn coins and hatching tickets as rewards for consistent engagement.</li>
+      <li>Level up your companions and unlock new rarities.</li>
+      <li>Track your streaks and progress to stay motivated.</li>
+      <li>Enjoy a relaxing, game-inspired interface designed for self-care.</li>
+    </ul>
+
+    <h2 id="tracking">Tracking</h2>
+    <p>
+      Every day, you complete 3 personalized questionnaires at times you set,
+      designed to help you monitor your mental health and emotional well-being.
+      These questionnaires encourage you to reflect on your daily habits, track your mood, and stay mindful of your
+      progress over time.
+      You can also set personal commitments and note down your thoughts to create a meaningful record of your journey.
+    </p>
+
+    <p>
+      By consistently completing these tasks and maintaining your streak, you earn coins and hatching tickets as rewards
+      for your efforts.
+      These rewards allow you to hatch eggs, collect unique companions, and watch them grow as a fun and motivating part
+      of your
+      self-improvement journey. The more consistent you are, the more you progress in
+      both tracking your mental health and expanding your collection.
+    </p>
+
+    <h2 id="collection">Collection</h2>
+    <p>
+      Purchase eggs of various rarities and use hatch tickets to progress towards unlocking new companions.
+      Once an egg hatches, you will receive a random companion, each with unique traits and designs.
+      Keep your companions happy and well-fed to help them grow and thrive.
+      With a wide range of companions to discover, the challenge awaits – can you collect them all?
+    </p>
+    <li><a href="{% url 'all_companions'%}">List of all Companions</a></li>
+
+    <h2 id="references"> Credits and References</h2>
+    <h3>Credits</h3>
+    <p><h4>Art:</h4>
+    <ul>
+      <li><a href="https://pokengine.org/collections/107s7x9x/Mongratis">Monogratis Collection (free to use)</a></li>
+      <li><a href="https://pokengine.org/search?query=permission%3Ayes">Collection of free to use sprites on
+          PokeEngine</a></li>
+      <li><a href="https://eeveeexpo.com/resources/1039/">Earthretha Fakemon Pack 1.4 by NanaelJustice {free to use}</a>
+      </li>
+
+    </ul>
+    </p>
+    <h3>References</h3>
+    <li><a href="https://pokengine.org/legal/public-use-policy">PokeEngine - Public Use Policy</a></li>
+
+  </section>
+</article>
+
+<!-- Table of contents toggle logic -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const tocHeader = document.querySelector('.wiki-toc-header');
+  const tocContent = document.querySelector('.wiki-toc-content');
+  const tocToggle = document.querySelector('.wiki-toc-toggle');
+  
+  if (tocHeader && tocContent && tocToggle) {
+    tocHeader.addEventListener('click', function() {
+      tocContent.classList.toggle('expanded');
+      tocToggle.classList.toggle('collapsed');
+    });
+  }
+});
+</script>
+{% endblock %}

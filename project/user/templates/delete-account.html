@@ -1,0 +1,21 @@
+{% extends "index.html" %}
+{% load static %}
+{% block title %}Delete-Account - Cozy Companions{% endblock %}
+{% block extra-css %}
+<link rel="stylesheet" href="{% static 'cssfiles/delete-account.css' %}">
+{% endblock %}
+{% block content %}
+<div class="card">
+    <h2>Delete Account</h2>
+    <p>Are you sure you want to delete your account?<br>This action cannot be undone.</p>
+    <!-- Delete account form -->
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <div class="delete-cancel-buttons">
+            <a href="{% url 'profile' %}" class="cancel">Cancel</a><br>
+            <button type="submit" class="delete">Delete My Account</button>
+        </div>
+    </form>
+</div>
+{% endblock %}

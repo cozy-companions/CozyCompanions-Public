@@ -1,0 +1,96 @@
+{% extends 'index.html' %}
+{% load static %}
+{% block title %}Create Profile - Cozy Companions{% endblock %}
+{% block extra-css %}
+<link rel="stylesheet" href="{% static 'cssfiles/profile-creation.css' %}">
+{% endblock %}
+{% block content %}
+<div class="card">
+  <h2>Create A Profile</h2>
+  <form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    {% if form.errors %}
+    <div class="form-errors">
+      {{ form.non_field_errors }}
+      {% if form.hobbies_json.errors %}
+      {% for error in form.hobbies_json.errors %}
+      <p>{{ error }}</p>
+      {% endfor %}
+      {% endif %}
+
+      {% for field in form %}
+      {% if field.errors and field.name != 'hobbies_json' %}
+      <p>{{ field.label }}: {{ field.errors|striptags }}</p>
+      {% endif %}
+      {% endfor %}
+    </div>
+    {% endif %}
+    <!-- Profile image upload and preview -->
+    <p>{{ form.profile_pic.label_tag }} {{ form.profile_pic }}</p>
+    <img id="profile-pic-preview" src="#" alt="Image Preview">
+    <p class="para">Enter your Wake Up Time:</p>
+    <p>{{ form.morning_time.label_tag }} {{ form.morning_time }}</p>
+    <p class="para">Enter when you are free during day:</p>
+    <p>{{ form.day_time.label_tag }} {{ form.day_time }}</p>
+    <p class="para">Enter your Bedtime:</p>
+    <p>{{ form.bed_time.label_tag }} {{ form.bed_time }}</p>
+    {{ form.timezone }}
+    {{ form.hobbies_json }}
+
+    <!-- Dynamic hobbies section handled by JS -->
+    <div id="dynamic-hobbies-section">
+      <label for="new-hobby-input">Add upto 5 hobbies:</label>
+      <input type="text" id="new-hobby-input" placeholder="e.g. Exercise, Music, Coding">
+      <button type="button" id="add-hobby-btn">+</button>
+      <p class="hobby-instructions">
+        Your Hobbies:
+      </p>
+      <div id="dynamic-hobbies-list"></div>
+    </div>
+
+    <div id="submit-reset-buttons">
+      <button type="submit">Submit</button>
+      <button type="reset">Clear</button>
+    </div>
+  </form>
+</div>
+<!-- Hobbies and timezone JS logic -->
+<script src="{% static 'scripts/add-hobbies.js' %}"></script>
+<script src="{% static 'scripts/timezone-detection.js' %}"></script>
+<script>
+  // Image preview logic for profile pic upload
+  document.addEventListener('DOMContentLoaded', function () {
+    const input = document.getElementById('id_profile_pic');
+    const preview = document.getElementById('profile-pic-preview');
+
+    if (input) {
+      input.addEventListener('change', function () {
+        const file = input.files[0];
+        if (file) {
+          const reader = new FileReader();
+          reader.onload = function (e) {
+            preview.src = e.target.result;
+            preview.style.display = 'block';
+          };
+          reader.readAsDataURL(file);
+        } else {
+          preview.src = '';
+          preview.style.display = 'none';
+        }
+      });
+    }
+  });
+
+  // Reset hobbies and image preview on form reset
+  const form = document.querySelector("form");
+  form.addEventListener("reset", function () {
+    document.getElementById('dynamic-hobbies-list').innerHTML = "";
+
+    const preview = document.getElementById('profile-pic-preview');
+    preview.style.display = 'none';
+    preview.src = "";
+
+    document.getElementById('new-hobby-input').value = "";
+  });
+</script>
+{% endblock %}

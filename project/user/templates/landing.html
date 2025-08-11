@@ -1,0 +1,34 @@
+{% extends 'index.html' %}
+{% load static %}
+
+{% block title %}landing - Cozy Companions{% endblock %}
+
+{% block extra-css %}
+<link rel="stylesheet" href="{% static 'cssfiles/landing.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="home-container">
+    <div class="home-box">
+        <img src="{% static 'logo.png' %}" alt="Cozy Companions Logo" class="home-logo">
+        <h1 class="welcome-title">Welcome to Cozy Companions</h1>
+        <p class="catchy-line">
+            <span class="icon-text">
+                <img src="{% static 'icons/heart-pulse-solid.svg' %}" alt="heart"> A Mental Health Tracker.
+            </span>
+        </p>
+        <div class="home-buttons">
+            <a href="{% url 'register' %}" class="home-btn">
+                <span class="icon-text">Sign Up
+                </span>
+            </a>
+
+            <a href="{% url 'Login' %}" class="home-btn">
+                <span class="icon-text">Login
+                </span>
+            </a>
+            <a href="{% url 'wiki' %}" class="btn-wiki">Wiki</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

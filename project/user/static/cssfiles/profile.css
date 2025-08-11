@@ -1,0 +1,236 @@
+body {
+    font-family: 'Fredoka', sans-serif;
+    background-color: #fffaf0;
+    margin: 0;
+    padding: 0;
+}
+/* Profile page main container */
+.container {
+    background-color: #ffffff;
+    max-width: 400px;
+    margin: 30px auto;
+    margin-bottom: 10px;
+    padding: 2rem;
+    padding-bottom: 0.5rem;
+    border-radius: 20px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+    animation: move 0.6s ease;
+    display: flex;
+    text-align: center;
+    flex-direction: column;
+    position: relative;
+}
+
+#not-hobbies {
+    display: flex;
+    flex-direction: column;
+    padding: 1rem min(5vw,15px);
+    padding-bottom: 0px;
+    text-align: left;
+}
+
+#email-display {
+    align-self: center;
+    color: #888;
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+}
+@keyframes move {
+    from {
+        opacity: 0;
+        transform: translateY(40px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0px);
+    }
+}
+.container ul {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    margin: 0 0 1.2rem 0;
+    padding: 0;
+}
+.container ul li {
+    background: #fff0f6;
+    color: #e7388a;
+    border-radius: 16px;
+    padding: 0.4em 1.1em;
+    font-size: 0.98rem;
+    font-weight: 500;
+    box-shadow: 0 1px 4px rgba(255, 20, 147, 0.07);
+    display: inline-block;
+}
+.personal{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 28px;
+    margin-bottom: 0.5rem;
+}
+strong {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    justify-content: center;
+    align-content: center;
+    row-gap: 1.5rem;
+    margin: 0.7rem 0 1.2rem 0;
+    font-size: 1.08rem;
+    color: #c71585;
+    font-weight: 600;
+    text-align: center;
+}
+strong p {
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    justify-self: center;
+}
+h2 , h3{
+    color: #ff1493;
+    font-weight: 700;
+}
+h3 {
+    margin: 1.2rem 0 0.5rem 0;
+    font-size: 1.15rem;
+    letter-spacing: 0.5px;
+}
+.btn-p{
+    text-decoration: none;
+    background-color: #ff1493;
+    display: block;
+    color: white;
+    border: none;
+    padding: 0.8rem 1.5rem;
+    margin: 12px auto 0 auto;
+    font-size: 1.08rem;
+    border-radius: 12px;
+    cursor: pointer;
+    width: 60%;
+    font-weight: bold;
+    animation: upDown 0.75s ease-in-out 1;
+    box-shadow: 0 0 5px palevioletred;
+    letter-spacing: 0.5px;
+    transition: background 0.2s, transform 0.2s;
+}
+.btn-p:hover{
+    background-color: #c71585;
+    transform: scale(1.06);
+}
+@keyframes upDown {
+    0%,100% {transform: rotate(0deg);}
+    25% { transform: rotate(2deg); }
+    50% { transform: rotate(-2deg); }
+    75% { transform: rotate(1deg); }
+}
+.btn-d{
+    color: rgb(251, 33, 55);
+    font-size: 0.98rem;
+    align-self: flex-end;
+    margin-top: 0.7rem;
+    margin-bottom: 0.2rem;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+.btn-d:hover{
+    color: #e60202;
+    text-decoration: underline;
+}
+.btn-wiki{
+    color: #00897b;
+    font-size: 0.98rem;
+    position: absolute;
+    left: 3rem;
+    bottom: 13px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+.btn-wiki:hover{
+    color: #005f56;
+    text-decoration: underline;
+}
+.profile-pic{
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    object-position: center top;
+    border-radius: 50%;
+    border: 2.5px solid #ff1493;
+    box-shadow: 0 2px 12px rgba(255, 20, 147, 0.10);
+    transition: transform 0.3s ease-in-out;
+}
+.chart-section {
+    width: 100%;
+    margin: 1.2rem 0 0.7rem 0;
+}
+.chart-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
+    margin-bottom: 10px;
+}
+.btn-chart {
+    text-decoration: none;
+    background-color: #ff1493;
+    color: white;
+    border: none;
+    padding: 0.5rem 1.2rem;
+    font-size: 0.93rem;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: bold;
+    box-shadow: 0 0 3px palevioletred;
+    transition: background 0.2s, transform 0.2s;
+    display: inline-block;
+    margin-bottom: 2px;
+}
+.btn-chart:hover {
+    background-color: #c71585;
+    transform: scale(1.07);
+}
+.chart-message {
+    color: #888;
+    font-size: 1rem;
+    font-weight: 500;
+    margin-bottom: 0.7rem;
+    text-align: center;
+}
+/* Tooltip styles for icons */
+.tooltip-container {
+    position: relative;
+    display: inline-block;
+    margin-left: 4px;
+}
+.tooltip-icon {
+    width: 20px;
+    height: auto;
+    vertical-align: middle;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+.tooltip-icon:hover {
+    transform: scale(1.1);
+}
+.tooltip-container:hover .tooltip-text {
+    visibility: visible;
+    opacity: 1;
+}
+/* Display styles for ticket and coin sections */
+.ticket-display, .coin-display {
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    justify-self: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-weight: 600;
+    color: #c71585;
+}

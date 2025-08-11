@@ -1,0 +1,1054 @@
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    text-align: center;
+}
+
+.content-wrapper {
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+    font-family: 'Fredoka', sans-serif;
+}
+
+h1 {
+    color: #e7388a;
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+}
+
+h2 {
+    color: #e7388a;
+    border-bottom: 3px solid #f2a619;
+    padding-bottom: 0.5rem;
+    margin-top: 2rem;
+    margin-bottom: 1.5rem;
+    display: table; 
+    margin: 2rem auto 1.5rem auto;
+}
+
+h3 {
+    color: #e7388a;
+}
+
+hr {
+    border: none;
+    height: 2px;
+    background-color: #f2a619;
+    margin: 3rem 0;
+}
+
+.user-info-bar {
+    text-align: center;
+    background-color: #fdf1e1;
+    border: 2px solid #e7388a;
+    padding: 0.75rem;
+    border-radius: 12px;
+    margin: 0 auto 2rem auto;
+    width: 400px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+.user-info-bar p {
+    margin: 0;
+    font-size: 1.1rem;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    gap: 5px;
+    color: #5c3c10;
+    font-weight: 600;
+}
+
+/* Grid for the selected companions */
+#active-grid-wrapper {
+    width: 600px;
+    height: 600px;
+    margin: 20px auto;
+    padding: 0;
+    box-sizing: border-box;
+    border-radius: 16px;
+    background-image: url('/static/backgrounds/grassland.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    display: block;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    border: 1px solid #f0eada;
+    overflow: hidden;
+    position: relative;
+    aspect-ratio: 1 / 1;
+}
+
+#active-grid-wrapper .creature-card {
+    background: transparent;
+    border: none;
+    box-shadow: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 80px;
+    height: 80px;
+    transition: all 3s ease-in-out;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+#active-grid-wrapper .creature-card:hover {
+    transform: scale(1.1);
+}
+
+#active-grid-wrapper .creature-card img {
+    width: 80px;
+    height: 80px;
+    object-fit: contain;
+    image-rendering: pixelated;
+    display: block;
+}
+
+/* Grid for all creatures */
+.user-creatures {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 1.5rem;
+    margin-top: 20px;
+}
+
+.user-creature {
+    background: #ffffff;
+    border-radius: 16px;
+    padding: 1rem 1rem;
+    text-align: center;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    border: 1px solid #f0eada;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    width: 200px;
+    min-height: 280px;
+    flex-shrink: 0;
+}
+
+.user-creature:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(231, 56, 138, 0.15);
+}
+
+.user-creature h3 {
+    font-weight: bold;
+    color: #e7388a;
+    font-size: 1.1rem;
+    margin: 10px 0 0;
+}
+
+.user-creature h4 {
+    font-weight: bold;
+    color: #f2a619;
+    font-size: 0.9rem;
+    margin-top: 0;
+}
+
+.user-creature img {
+    width: 60px;
+    height: 60px;
+    object-fit: contain;
+    image-rendering: pixelated;
+    transition: transform 0.2s ease;
+}
+
+.user-creature:hover img {
+    transform: scale(1.1);
+}
+
+.creature-action {
+    background-color: #f2a619;
+    color: #fffaf0;
+    padding: 0.6rem 1.2rem;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-family: 'Fredoka', sans-serif;
+    font-weight: 600;
+    font-size: 1rem;
+    margin-top: 10px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    width: 100%;
+    max-width: 120px;
+}
+
+.creature-action:hover:not(:disabled) {
+    background-color: #ffbc00;
+    transform: scale(1.05);
+}
+
+.creature-action:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.creature-action:disabled:hover {
+    background-color: #ccc;
+    transform: none;
+}
+
+.select-btn { 
+    background-color: #4CAF50; 
+    color: white; 
+}
+
+.select-btn:hover:not(:disabled) {
+    background-color: #45a049;
+}
+
+.unselect-btn { 
+    background-color: #d9534f; 
+    color: white; 
+}
+
+.unselect-btn:hover:not(:disabled) {
+    background-color: #c9302c;
+}
+
+.feed-btn { 
+    background-color: #f2a619; 
+    color: white; 
+}
+
+.feed-btn:hover:not(:disabled) {
+    background-color: #ffbc00;
+}
+
+/* Hunger Bar Styling */
+.hunger-bar {
+    width: 100%;
+    background-color: #e9e9e9;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    overflow: hidden;
+    height: 15px;
+    margin: 10px 0;
+}
+
+.hunger-fill {
+    height: 100%;
+    background-color: #f44336;
+    width: 0%;
+    transition: width 0.5s ease-in-out;
+}
+
+.status-text {
+    font-size: 12px;
+    font-style: italic;
+    color: #666;
+    margin: 5px 0;
+}
+
+.messages {
+    color: red;
+    display: inline-block;
+    background-color: #fff0f0;
+    border: 1px solid #ffcccc;
+    padding: 1rem;
+    border-radius: 8px;
+    font-weight: 600;
+    margin: 1rem auto;
+    text-align: center;
+    width: fit-content;
+    max-width: 500px;
+}
+
+.user-creatures p {
+    font-weight: 600;
+    color: #555;
+    margin-top: -10px;
+    margin-bottom: 40px;
+}
+
+/* Small creature cards section */
+.selected-creatures-cards {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    margin: 1rem 0 2rem 0;
+    flex-wrap: wrap;
+}
+
+.small-creature-card {
+    background: #ffffff;
+    border-radius: 12px;
+    padding: 0.8rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    border: 1px solid #f0eada;
+    transition: transform 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 80px;
+    height: 80px;
+    position: relative;
+}
+
+.small-creature-card:hover {
+    transform: scale(1.1);
+    box-shadow: 0 4px 12px rgba(231, 56, 138, 0.2);
+}
+
+.small-creature-card img {
+    width: 60px;
+    height: 60px;
+    object-fit: contain;
+    image-rendering: pixelated;
+}
+
+.unselect-cross {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    width: 24px;
+    height: 24px;
+    background: #e7388a;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    font-weight: bold;
+    transition: all 0.2s ease;
+    z-index: 20;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.small-creature-card:hover .unselect-cross {
+    display: inline-block;
+}
+
+.unselect-cross:hover {
+    background: #ff1493;
+    transform: scale(1.1);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.unselect-cross:hover::after {
+    content: "Unselect";
+    position: absolute;
+    right: 30px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: #e7388a;
+    color: white;
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-family: 'Fredoka', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    white-space: nowrap;
+    z-index: 30;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    animation: tooltipFadeIn 0.2s ease;
+}
+
+.unselect-cross:hover::before {
+    content: "";
+    position: absolute;
+    right: 26px;
+    top: 50%;
+    transform: translateY(-50%);
+    border: 4px solid transparent;
+    border-left-color: #e7388a;
+    z-index: 30;
+}
+
+@keyframes tooltipFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-50%) translateX(5px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(-50%) translateX(0);
+    }
+}
+
+.unselect-cross span {
+    line-height: 1;
+    margin-top: -2px;
+}
+
+.no-selected {
+    color: #666;
+    font-style: italic;
+    text-align: center;
+    margin: 1rem 0;
+}
+
+.all-creatures-header-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+  margin: 2rem 0;
+  position: relative;
+  flex-wrap: wrap;
+}
+
+#creatures-head-wrapper {
+    position: absolute;
+    left: 0;
+    top: -2rem;
+    z-index: 10;
+    text-align: left;
+    padding-left: 1rem; 
+}
+
+#all-creatures-head {
+  margin: 0;
+  color: #e7388a;
+  font-size: 2.3rem;
+  text-align: center;
+  border-bottom: 3px solid #f2a619;
+  padding-bottom: 0.5rem;
+  display: inline-block;
+}
+
+#feed-all-wrapper {
+  position: absolute;
+  right: 1rem;
+}
+
+#feed-all {
+    margin: 0;
+    padding: 0.6rem 1.5rem;
+    color: #fff;
+    background-color: #4CAF50;
+    font-size: 1rem;
+    font-weight: bold;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.3s ease;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+#feed-all:hover {
+    background-color: #45a049;
+    transform: translateY(-2px);
+}
+
+#feed-all.disabled-feed-all {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+#feed-all.disabled-feed-all:hover {
+  background-color: #ccc;
+  transform: none;
+}
+
+
+.creature-details-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.creature-details-card {
+    background: #fff;
+    border-radius: 24px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
+    padding: 2.5rem 2.5rem 2rem 2.5rem;
+    text-align: center;
+    position: relative;
+    transform: scale(1.2);
+    animation: popIn 0.3s cubic-bezier(.68, -0.55, .27, 1.55);
+    max-width: 400px;
+    width: 90%;
+}
+
+@keyframes popIn {
+    0% { transform: scale(0.7); opacity: 0; }
+    100% { transform: scale(1.2); opacity: 1; }
+}
+
+.close-details-btn {
+    background: #e7388a;
+    color: #FFD600;
+    border: none;
+    border-radius: 50%;
+    width: 36px;
+    height: 36px;
+    font-size: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.10);
+    transition: background 0.2s, color 0.2s;
+    position: absolute;
+    top: 16px;
+    right: 20px;
+    z-index: 2;
+    cursor: pointer;
+}
+
+.close-details-btn:hover {
+    background: #ff1493;
+    color: #fff700;
+}
+
+.close-x {
+    color: #FFD600;
+    font-weight: bold;
+    font-size: 2rem;
+    line-height: 1;
+}
+
+.creature-details-img {
+    width: 120px;
+    height: 120px;
+    object-fit: contain;
+    image-rendering: pixelated;
+    margin-bottom: 1rem;
+}
+
+.creature-details-name {
+    color: #e7388a;
+    font-family: 'Fredoka', sans-serif;
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin: 1rem 0 0;
+}
+
+.creature-details-level {
+    font-weight: bold;
+    color: #f2a619;
+    font-size: 0.9rem;
+    margin: 0 0 1rem;
+}
+
+.creature-details-description {
+    color: #666;
+    font-family: 'Fredoka', sans-serif;
+    font-size: 1rem;
+    margin: 0;
+}
+
+.creature-details-buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    margin-top: 1.5rem;
+}
+
+.details-feed-btn, .details-unselect-btn {
+    background-color: #f2a619;
+    color: #fffaf0;
+    padding: 0.8rem 1.5rem;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-family: 'Fredoka', sans-serif;
+    font-weight: 600;
+    font-size: 1rem;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    min-width: 100px;
+}
+
+.details-feed-btn:hover:not(:disabled) {
+    background-color: #ffbc00;
+    transform: scale(1.05);
+}
+
+.details-unselect-btn {
+    background-color: #d9534f;
+    color: white;
+}
+
+.details-unselect-btn:hover:not(:disabled) {
+    background-color: #c9302c;
+    transform: scale(1.05);
+}
+
+.details-feed-btn:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.details-feed-btn:disabled:hover {
+    background-color: #ccc;
+    transform: none;
+}
+
+.details-unselect-btn:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.details-unselect-btn:disabled:hover {
+    background-color: #ccc;
+    transform: none;
+}
+
+.hibernating-header {
+  color: #6a5acd;
+  border-bottom: 3px solid #9370db;
+  padding-bottom: 0.5rem;
+  margin-top: 3rem;
+  margin-bottom: 1.5rem;
+}
+
+.hibernating-creatures {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1.5rem;
+  padding: 1rem 0;
+  margin-top: 1rem;
+  background-color: #f8f9fa;
+  border-radius: 16px;
+  border: 1px solid #e9ecef;
+}
+
+.user-creature.hibernating {
+  background-color: #f0f8ff;
+  border: 2px solid #d1e7ff;
+  opacity: 0.8;
+}
+
+.user-creature.hibernating:hover {
+  opacity: 1;
+}
+
+.wake-btn {
+  background-color: #6a5acd;
+  display: flex;
+  justify-content: center;
+  gap: 5px;
+  color: white;
+}
+
+.wake-btn:hover:not(:disabled) {
+  background-color: #7b68ee;
+}
+
+.no-hibernating {
+  color: #666;
+  font-style: italic;
+  width: 100%;
+  text-align: center;
+  padding: 1rem;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .content-wrapper {
+        padding: 0 0.5rem;
+        margin: 1rem auto;
+    }
+
+    h1 {
+        font-size: 2rem;
+    }
+
+    h2 {
+        font-size: 1.5rem;
+    }
+
+    .user-info-bar {
+        width: 90%;
+        max-width: 300px;
+        padding: 0.5rem;
+    }
+
+    .user-info-bar p {
+        font-size: 1rem;
+    }
+
+    /* Small creature cards responsive */
+    .selected-creatures-cards {
+        gap: 0.8rem;
+        margin: 0.8rem 0 1.5rem 0;
+    }
+
+    .small-creature-card {
+        width: 70px;
+        height: 70px;
+        padding: 0.6rem;
+    }
+
+    .small-creature-card img {
+        width: 50px;
+        height: 50px;
+    }
+
+    .unselect-cross {
+        width: 20px;
+        height: 20px;
+        font-size: 14px;
+        top: -6px;
+        right: -6px;
+    }
+
+    /* Active grid responsive */
+    #active-grid-wrapper {
+        width: 100%;
+        max-width: 600px;
+        height: auto;
+        margin: 15px auto;
+        padding: 0;
+        aspect-ratio: 1 / 1;
+    }
+
+    #active-grid-wrapper .creature-card img {
+        width: 60px;
+        height: 60px;
+    }
+
+    /* User creatures grid responsive */
+    .user-creatures {
+        gap: 1rem;
+        padding: 0.5rem 0;
+    }
+
+    .user-creature {
+        width: 160px;
+        min-height: 250px;
+        padding: 1rem 0.5rem;
+    }
+
+    .user-creature img {
+        width: 50px;
+        height: 50px;
+    }
+
+    .creature-action {
+        font-size: 0.9rem;
+        padding: 0.5rem 1rem;
+        max-width: 100px;
+    }
+
+    .creature-details-card {
+        padding: 1.5rem 1rem;
+        width: 85%;
+        max-width: 350px;
+    }
+
+    .creature-details-img {
+        width: 100px;
+        height: 100px;
+    }
+
+    .creature-details-name {
+        font-size: 1.3rem;
+    }
+
+    .creature-details-buttons {
+        gap: 0.8rem;
+        margin-top: 1.2rem;
+    }
+
+    .details-feed-btn, .details-unselect-btn {
+        padding: 0.6rem 1.2rem;
+        font-size: 0.9rem;
+        min-width: 80px;
+    }
+
+    #all-creatures-head{
+        font-size: 2.3rem
+    }
+
+    .all-creatures-header-container {
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    #creatures-head-wrapper {
+        top: -1.5rem;
+        padding-left: 0.5rem;
+    }
+    
+    #feed-all-wrapper {
+        position: static;
+        order: 1; /
+    }
+    
+    #all-creatures-head {
+        font-size: 2.3rem;
+    }
+    
+    #feed-all {
+        padding: 0.5rem 1.2rem;
+        font-size: 1.0rem;
+    }
+}
+
+@media (max-width: 480px) {
+    h1 {
+        font-size: 1.8rem;
+    }
+
+    h2 {
+        font-size: 1.3rem;
+    }
+
+    .user-info-bar {
+        width: 95%;
+        padding: 0.4rem;
+    }
+
+    .user-info-bar p {
+        font-size: 0.9rem;
+    }
+
+    .selected-creatures-cards {
+        gap: 0.6rem;
+        margin: 0.6rem 0 1.2rem 0;
+    }
+
+    .small-creature-card {
+        width: 60px;
+        height: 60px;
+        padding: 0.5rem;
+    }
+
+    .small-creature-card img {
+        width: 40px;
+        height: 40px;
+    }
+
+    .unselect-cross {
+        width: 18px;
+        height: 18px;
+        font-size: 12px;
+        top: -5px;
+        right: -5px;
+    }
+
+    #active-grid-wrapper {
+        width: 100%;
+        height: auto;
+        margin: 10px auto;
+        aspect-ratio: 1 / 1;
+    }
+
+    #active-grid-wrapper .creature-card img {
+        width: 50px;
+        height: 50px;
+    }
+
+    .user-creatures {
+        gap: 0.8rem;
+    }
+
+    .user-creature {
+        width: 140px;
+        min-height: 220px;
+        padding: 0.8rem 0.4rem;
+    }
+
+    .user-creature img {
+        width: 45px;
+        height: 45px;
+    }
+
+    .creature-action {
+        font-size: 0.8rem;
+        padding: 0.4rem 0.8rem;
+        max-width: 90px;
+    }
+
+    .creature-details-card {
+        padding: 1.2rem 0.8rem;
+        width: 90%;
+    }
+
+    .creature-details-img {
+        width: 80px;
+        height: 80px;
+    }
+
+    .creature-details-name {
+        font-size: 1.1rem;
+    }
+
+    .creature-details-buttons {
+        gap: 0.6rem;
+        margin-top: 1rem;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .details-feed-btn, .details-unselect-btn {
+        padding: 0.5rem 1rem;
+        font-size: 0.8rem;
+        min-width: 120px;
+    }
+
+    .close-details-btn {
+        top: 8px;
+        right: 8px;
+        width: 30px;
+        height: 30px;
+        font-size: 1.3rem;
+    }
+
+    #creatures-head-wrapper {
+        top: -1.2rem;
+    }
+    
+    #feed-all-wrapper {
+        top: -1.2rem;
+    }
+    
+    #all-creatures-head {
+        font-size: 2.3rem;
+    }
+    
+    #feed-all {
+        padding: 0.4rem 1rem;
+        font-size: 1.0rem;
+    }
+}
+
+@media (max-width: 360px) {
+    .content-wrapper {
+        padding: 0 0.3rem;
+        margin: 0.5rem auto;
+    }
+
+    h1 {
+        font-size: 1.6rem;
+    }
+
+    h2 {
+        font-size: 1.2rem;
+    }
+
+    /* Ultra small screens */
+    .small-creature-card {
+        width: 55px;
+        height: 55px;
+        padding: 0.4rem;
+    }
+
+    .small-creature-card img {
+        width: 35px;
+        height: 35px;
+    }
+
+    .user-creature {
+        width: 120px;
+        min-height: 200px;
+    }
+
+    .user-creature img {
+        width: 40px;
+        height: 40px;
+    }
+
+    #active-grid-wrapper {
+        height: auto;
+        aspect-ratio: 1 / 1;
+    }
+
+    #active-grid-wrapper .creature-card img {
+        width: 40px;
+        height: 40px;
+    }
+
+    .creature-details-card {
+        padding: 1rem 0.6rem;
+        width: 95%;
+    }
+
+    .creature-details-img {
+        width: 70px;
+        height: 70px;
+    }
+
+    .creature-details-name {
+        font-size: 1rem;
+    }
+
+    #all-creatures-head{
+        font-size: 2.3rem
+    }
+}
+
+@media (max-width: 768px) and (orientation: landscape) {
+    #active-grid-wrapper {
+        height: auto;
+        aspect-ratio: 1 / 1;
+    }
+
+    .user-creatures {
+        gap: 0.6rem;
+    }
+}
+
+.rarity-group {
+  margin-bottom: 3rem;
+}
+
+.rarity-header {
+  color: #e7388a;
+  text-align: center;
+  font-size: 1.8rem;
+  margin: 2rem 0 1rem;
+  position: relative;
+}
+
+.hibernating-subheader {
+  color: #6a5acd;
+  text-align: center;
+  font-size: 1.4rem;
+  margin: 1.5rem 0 0.5rem;
+  font-style: italic;
+}
+
+.rarity-legendary {
+    background-color: #fff6c9;
+    border: 2px solid #ffea7f;
+}
+
+.rarity-elite {
+    background-color: #ffdfd9;
+    border: 2px solid #ffb2a4;
+}
+
+.rarity-epic {
+    background-color: #f9f2ff;
+    border: 2px solid #e4c4ff;
+}
+
+.rarity-rare {
+    background-color: #fff2f0;
+    border: 2px solid #ffcac1;
+}
+
+.rarity-common {
+    background-color: white;
+    border: 2px solid #d4d4d4;
+}

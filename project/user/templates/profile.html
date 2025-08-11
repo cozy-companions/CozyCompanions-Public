@@ -1,0 +1,61 @@
+{% extends 'index.html' %}
+{% load static %}
+{% block title %}Profile - Cozy Companions{% endblock %}
+{% block extra-css %}
+<link rel="stylesheet" href="{% static 'cssfiles/profile.css' %}">
+{% endblock %}
+{% block content %}
+<div class="container">
+  <!-- Profile picture and username -->
+  <div id="not-hobbies">
+    <div class="personal">
+      <img src="{{ profile.profile_pic.url }}" class="profile-pic" alt="Profile Picture"
+        onerror="this.onerror=null; this.src='/media/default.jpg';">
+      <h2>{{ request.user.get_username }}</h2>
+    </div>
+    <p id="email-display">Email: {{ request.user.email }}</p>
+  </div>
+  <strong>
+    <!-- Ticket, coin, streak, and score displays -->
+    <p class="ticket-display"><span class="tooltip-container">
+        <img src="{% static 'icons/ticket.png' %}" alt="Ticket" class="tooltip-icon">
+      </span> Hatch Tickets: {{profile.tickets}}
+    </p>
+    <p class="coin-display"><span class="tooltip-container">
+        <img src="{% static 'icons/coin.png' %}" alt="Coin" class="tooltip-icon">
+      </span> Coins: {{ profile.points }}
+    </p>
+    <p class="streak-display"><span class="tooltip-container">
+        <img src="{% static 'icons/streak.png' %}" alt="Streak" class="tooltip-icon">
+      </span> Streak: {{ profile.streak }}
+    </p>
+    <p class="score-display"><span class="tooltip-container">
+        <img src="{% static 'icons/score.png' %}" alt="Score" class="tooltip-icon">
+      </span> Score: {{ profile.score }}
+    </p>
+
+  </strong>
+  <!-- Chart section for progress links -->
+  <div class="chart-section">
+    <p class="chart-message">View your progress charts below!</p>
+    <div class="chart-buttons">
+      <a href="{% url 'chart-page' slug='sleep' %}" class="btn-chart">Sleep Chart</a>
+      <a href="{% url 'chart-page' slug='motivation' %}" class="btn-chart">Motivation Chart</a>
+      <a href="{% url 'chart-page' slug='social-development' %}" class="btn-chart">Social Development Chart</a>
+      <a href="{% url 'chart-page' slug='daily-rating' %}" class="btn-chart">Daily Rating Chart</a>
+    </div>
+  </div>
+  <h3>Hobbies:</h3>
+  <ul>
+    {% for hobby, active in profile.hobbies.items %}
+    {% if active %}
+    <li>{{ hobby }}</li>
+    {% endif %}
+    {% endfor %}
+  </ul>
+  <a href="{% url 'profile-update' %}" class="btn-p">Update Profile</a>
+    <a href="{% url 'logout' %}" class="btn-p">Logout</a>
+    <a href="{% url 'wiki' %}" class="btn-wiki">Wiki</a>
+    <a href="{% url 'delete-account' %}" class="btn-d">Delete Account</a>
+</div>
+{% endblock %}

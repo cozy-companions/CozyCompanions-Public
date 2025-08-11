@@ -1,0 +1,86 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block title %}Cozy Companions{% endblock %}</title>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="{% static 'cssfiles/styles.css' %}">
+  <link rel="icon" type="image/x-icon" href = "{% static 'icons/favicon.png'%}">
+  {% block extra-css %}{% endblock %}
+</head>
+
+<body{% if not user.is_authenticated %} class="logged-out" {% endif %}>
+  <!-- Main navigation bar -->
+  <nav id="main-navbar">
+    <a href="{% url 'index' %}"><img src="{% static 'logo.png' %}" alt="Cozy Companions Logo" class="logo"></a>
+    <div class="right">
+      <input type="checkbox" id="nav-toggle" class="nav-toggle">
+      {% if not user.is_authenticated %}
+        <label for="nav-toggle" class="nav-toggle-label">
+          <span></span>
+        </label>
+      {% endif %}
+      <ul class="nav-links">
+        {% if user.is_authenticated %}
+        {% if has_profile %}
+        <li class="nav-status">
+          <span class="nav-status-item">
+            <img src="{% static 'icons/coin.png' %}" alt="Coin" class="nav-status-icon">
+            <span class="nav-status-value">{{ user.profile.points }}</span>
+            <span class="nav-status-tooltip">Coins</span>
+          </span>
+          <span class="nav-status-item">
+            <img src="{% static 'icons/ticket.png' %}" alt="Ticket" class="nav-status-icon">
+            <span class="nav-status-value">{{ user.profile.tickets }}</span>
+            <span class="nav-status-tooltip">Hatch Tickets</span>
+          </span>
+        </li>
+
+        <li><a href="{% url 'profile' %}" class="nav-icon-button">
+            <img src="{{ user.profile.profile_pic.url }}" alt="Profile" class="nav-profile-pic"
+              onerror="this.onerror=null; this.src='/media/default.jpg';">
+            <span class="profile-text">Profile</span>
+            <div class="streak-bubble">
+              <img src="{% static 'icons/streak.png' %}" alt="Streak" class="streak-bubble-icon">
+              <span class="streak-bubble-number">{{ user.profile.streak }}</span>
+            </div>
+            <span class="profile-tooltip">{{ request.user.get_username }}</span>
+          </a></li>
+        {% else %}
+        <li><a href="{% url 'logout' %}" class="home-button">Logout</a></li>
+        {% endif %}
+        {% else %}
+        <li><a href="{% url 'register' %}" class="home-button"><img src="{% static 'icons/user-plus-solid.svg' %}"
+              width="20" height="20"> Sign up</a></li>
+        <li><a href="{% url 'Login' %}" class="home-button"><img src="{% static 'icons/right-to-bracket-solid.svg' %}"
+              width="20" height="20"> Log in</a>
+        </li>
+        {% endif %}
+      </ul>
+    </div>
+  </nav>
+  <!-- Toast messages for notifications -->
+  {% if messages %}
+  <div id="toast-container">
+    {% for message in messages %}
+    <div class="toast {% if 'success' in message.tags %}toast-success
+                      {% elif 'error' in message.tags %}toast-error
+                      {% elif 'warning' in message.tags%}toast-warning
+                      {% else %}toast-info{% endif %}">
+      {{message}}
+    </div>
+    {% endfor %}
+  </div>
+  {% endif %}
+
+  {% block content %}{% endblock %}
+
+  <script src="{% static 'scripts/toast.js' %}"></script>
+  </body>
+
+</html>

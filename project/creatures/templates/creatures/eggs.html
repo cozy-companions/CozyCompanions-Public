@@ -1,0 +1,188 @@
+{% extends "index.html" %}
+{% load static %}
+{% block extra-css %}
+<link rel="stylesheet" href="{% static 'cssfiles/eggs.css' %}">
+{% endblock %}
+
+{% block content %}
+<h1>Eggs</h1>
+<div class="user-info-bar">
+    <p>{{ request.user.profile.points }}&nbsp; <img src="{% static 'icons/coin.png' %}" alt="Coin" class="nav-status-icon"> |
+       {{ request.user.profile.tickets }}&nbsp; <img src="{% static 'icons/ticket.png' %}" alt="Ticket" class="nav-status-icon"></p>
+</div>
+
+<h2>Shop</h2>
+<div class="egg-shop">
+  {% for egg in eggs %}
+    <div class="egg-item">
+      <img src="{% static egg.sprite %}" alt="{{ egg.rarity }} Egg" width="80">
+      <h3>{{ egg.rarity }} Egg</h3>
+      <p class="para">{{ egg.price }}&nbsp; <img src="{% static 'icons/coin.png' %}" alt="Coin" class="nav-status-icon"></p>
+      <!-- Button disables if user has 3 eggs -->
+      <button class="buy-egg" data-egg-id="{{ egg.id }}" {% if user_eggs|length >= 3 %}disabled{% endif %}>
+        Buy
+      </button>
+    </div>
+  {% endfor %}
+</div>
+  {% if user_eggs|length >= 3 %}
+    <p id="egg-slot-full-warning">Your egg slots are full. Hatch an egg to buy more.</p>
+  {% endif %}
+
+<hr>
+
+<h2>Your Egg Slots</h2>
+<div class="user-eggs">
+  {% for ue in user_eggs %}
+    <div class="user-egg" id="user-egg-{{ ue.id }}">
+      
+      <img src="{% static ue.egg.sprite %}" class="egg-img" alt="{{ ue.egg.rarity }} Egg" width="100">
+      <h3>
+        {{ ue.egg.rarity }} Egg </h3><br>
+        <p>Progress<br> <span class="progress">{{ ue.progress }}</span> / {{ ue.egg.hatch_requirement }}&nbsp; <img src="{% static 'icons/ticket.png' %}" alt="Ticket" class="nav-status-icon">
+      </p>
+
+      <!-- Show Hatch button if ready, else Add Ticket -->
+      {% if ue.progress >= ue.egg.hatch_requirement %}
+        <button class="egg-action" data-ue-id="{{ ue.id }}">Hatch</button>
+      {% else %}
+        <button class="egg-action" data-ue-id="{{ ue.id }}">Add Ticket</button>
+      {% endif %}
+
+    </div>
+    {{ ue.egg.hatch_sprites|json_script:ue.id }}
+  {% empty %}
+    <p>You don't have any eggs. Buy one from the shop!</p>
+  {% endfor %}
+</div>
+
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const csrftoken = '{{ csrf_token }}';
+
+  // --- Buy Egg Logic ---
+  document.querySelectorAll('.buy-egg').forEach(btn => {
+    btn.addEventListener('click', function() {
+      const eggId = this.dataset.eggId;
+      fetch(`/companions/buy/${eggId}/`, {
+        method: 'POST',
+        headers: {'X-CSRFToken': csrftoken}
+      })
+      .then(res => res.json())
+      .then(data => {
+        if (data.error) {
+          alert(data.error);
+        } else {
+          location.reload(); // Refresh to show the new egg
+        }
+      });
+    });
+  });
+
+  // --- Add Ticket / Hatch Logic ---
+  document.querySelectorAll('.egg-action').forEach(btn => {
+    btn.addEventListener('click', function() {
+      const ueId = this.dataset.ueId;
+      if (this.textContent.trim() === 'Add Ticket') {
+        fetch(`/companions/add_ticket/${ueId}/`, {
+          method: 'POST',
+          headers: {'X-CSRFToken': csrftoken}
+        })
+        .then(res => res.json())
+        .then(data => {
+          if (data.error) return alert(data.error);
+          
+          const eggDiv = document.getElementById(`user-egg-${ueId}`);
+          eggDiv.querySelector('.progress').textContent = data.progress;
+          
+          if (data.ready) {
+            this.textContent = 'Hatch'; // Button now says "Hatch"
+            this.classList.add('hatch-wiggle');
+            setTimeout(() => this.classList.remove('hatch-wiggle'), 1000);
+          }
+          // Also update ticket count on the page
+          location.reload(); // Simple way to update everything
+        });
+      } else if (this.textContent.trim() === 'Hatch') {
+        hatchEggAnimation(ueId, this);
+      }
+    });
+  });
+
+  // --- Animation and Reveal Logic ---
+  function hatchEggAnimation(ueId, btn) {
+    const eggDiv = document.getElementById(`user-egg-${ueId}`);
+    const framesDataElement = document.getElementById(ueId);
+    const frames = JSON.parse(framesDataElement.textContent);
+    btn.disabled = true;
+
+    // Create modal overlay with large egg image
+    const overlay = document.createElement('div');
+    overlay.className = 'modal-overlay';
+    overlay.innerHTML = `
+      <div class="creature-reveal-modal">
+        <img class="modal-egg-img" src="/static/${frames[0]}" alt="Hatching Egg" width="180">
+        <p class="hatching-text"><b>Hatching...</b></p>
+      </div>
+    `;
+    document.body.appendChild(overlay);
+    document.body.classList.add('blurred');
+    const modalEggImg = overlay.querySelector('.modal-egg-img');
+
+    function doShake() {
+      modalEggImg.classList.add('shake');
+      setTimeout(() => modalEggImg.classList.remove('shake'), 300);
+    }
+
+    function playHatchFrames(i = 0) {
+      if (i < frames.length) {
+        setTimeout(() => {
+          modalEggImg.src = `/static/${frames[i]}`;
+          doShake();
+          playHatchFrames(i + 1);
+        }, 500);
+      } else {
+        setTimeout(() => revealCreature(ueId, overlay), 1000);
+      }
+    }
+    playHatchFrames();
+  }
+
+  function revealCreature(ueId, overlay) {
+    fetch(`/companions/hatch/${ueId}/`, {
+      method: 'POST',
+      headers: {'X-CSRFToken': csrftoken}
+    })
+    .then(res => res.json())
+    .then(data => {
+      if (data.error) {
+        alert(data.error);
+        // Re-enable button on error
+        const btn = document.getElementById(`user-egg-${ueId}`)?.querySelector('.egg-action');
+        if (btn) btn.disabled = false;
+        overlay.remove();
+        document.body.classList.remove('blurred');
+        return;
+      }
+      // Update modal overlay with creature reveal and close button
+      overlay.innerHTML = `
+        <div class="creature-reveal-modal">
+          <button class="close-modal-btn styled-close" aria-label="Close">
+            <span class="close-x">&times;</span>
+          </button>
+          <img src="/static/${data.creature_sprite}" alt="${data.creature_name}" width="180">
+          <p>You hatched a ${data.creature_rarity} <b class="creature-name-pink">${data.creature_name}</b> (Lvl ${data.level})!</p>
+        </div>
+      `;
+      // Close button logic
+      overlay.querySelector('.close-modal-btn').onclick = function() {
+        overlay.remove();
+        document.body.classList.remove('blurred');
+        location.reload();
+      };
+    });
+  }
+});
+</script>
+{% endblock %}
